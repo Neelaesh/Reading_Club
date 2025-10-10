@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "allowJs": true, // Allows JavaScript files to be compiled
+    "allowSyntheticDefaultImports": true, // Allows default imports from modules with no default export
+    "declaration": true, // Generates corresponding '.d.ts' file
+    "esModuleInterop": true, // Enables emit interoperability between CommonJS and ES Modules
+    "experimentalDecorators": true, // Enables experimental support for decorators
+    "jsx": "react", // Specifies the JSX code generation
+    "lib": ["dom", "es2015"], // Specifies the library files to be included in the compilation
+    "listFiles": true, // Include files in the compilation
+    "module": "ESNext", // Specifies the module code generation
+    "moduleResolution": "node", // Specifies the module resolution strategy
+    "noImplicitAny": true, // Raise error on expressions and declarations with an implied 'any' type
+    "outDir": "./dist", // Specifies the output directory for compiled files
+    "removeComments": true, // Removes comments from the output
+    "sourceMap": true, // Generates corresponding '.map' file
+    "strict": true, // Enable all strict type-checking options
+    "target": "es5", // Specifies the ECMAScript target version
+    "typeRoots": ["../node_modules/@types", "./types"] // Specifies the root folders for type definitions
+    //"types": ["jest", "node", "@testing-library/jest-dom"], // Specifies type definitions to be included
+  },
+  "include": [
+    "./src/index.tsx",
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "./src/**/*.js",
+    "./src/**/*.jsx"
+  ], // Specifies the files to be included in the compilation
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "coverage",
+    "scripts",
+    "webpack.config.js",
+    "webpack.dev.js",
+    "webpack.prod.js",
+    "jest.config.js",
+    "babel.config.js"
+  ] // Specifies the files to be excluded from the compilation
+}
