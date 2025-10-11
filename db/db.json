@@ -1,0 +1,278 @@
+{
+  "members": [
+    {
+      "userId": 1,
+      "email": "alice01@example.com",
+      "books": [
+        1,
+        2
+      ],
+      "dateOfJoining": "2024-11-03T09:00:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=1",
+      "id": "77cc"
+    },
+    {
+      "userId": 2,
+      "email": "bob88@example.com",
+      "books": [
+        3
+      ],
+      "dateOfJoining": "2025-02-12T12:00:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=2",
+      "id": "57d5"
+    },
+    {
+      "userId": 3,
+      "email": "charlie92@example.com",
+      "books": [
+        4,
+        5
+      ],
+      "dateOfJoining": "2023-09-25T10:15:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=3",
+      "id": "5f04"
+    },
+    {
+      "userId": 4,
+      "email": "diana23@example.com",
+      "books": [
+        6
+      ],
+      "dateOfJoining": "2024-01-15T14:00:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=4",
+      "id": "52dd"
+    },
+    {
+      "userId": 5,
+      "email": "ethan77@example.com",
+      "books": [
+        2,
+        7
+      ],
+      "dateOfJoining": "2025-03-08T09:30:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=5",
+      "id": "d4a5"
+    },
+    {
+      "userId": 6,
+      "email": "fiona56@example.com",
+      "books": [
+        8,
+        9,
+        10
+      ],
+      "dateOfJoining": "2023-12-20T08:00:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=6",
+      "id": "b0d1"
+    },
+    {
+      "userId": 7,
+      "email": "george34@example.com",
+      "books": [
+        11
+      ],
+      "dateOfJoining": "2024-05-04T11:45:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=7",
+      "id": "80dc"
+    },
+    {
+      "userId": 8,
+      "email": "hannah19@example.com",
+      "books": [
+        12,
+        13
+      ],
+      "dateOfJoining": "2024-09-10T16:00:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=8",
+      "id": "feef"
+    },
+    {
+      "userId": 9,
+      "email": "ian05@example.com",
+      "books": [
+        14
+      ],
+      "dateOfJoining": "2023-08-19T13:20:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=9",
+      "id": "b6f6"
+    },
+    {
+      "userId": 10,
+      "email": "julia47@example.com",
+      "books": [
+        15,
+        3
+      ],
+      "dateOfJoining": "2024-04-02T07:00:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=10",
+      "id": "427c"
+    },
+    {
+      "userId": 11,
+      "email": "karl99@example.com",
+      "books": [
+        5,
+        16
+      ],
+      "dateOfJoining": "2025-01-18T15:30:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=11",
+      "id": "6848"
+    },
+    {
+      "userId": 12,
+      "email": "linda82@example.com",
+      "books": [
+        7
+      ],
+      "dateOfJoining": "2024-10-06T09:00:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=12",
+      "id": "fd7d"
+    },
+    {
+      "userId": 13,
+      "email": "mike40@example.com",
+      "books": [
+        17,
+        1
+      ],
+      "dateOfJoining": "2023-11-29T18:45:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=13",
+      "id": "1831"
+    },
+    {
+      "userId": 14,
+      "email": "nina28@example.com",
+      "books": [
+        9
+      ],
+      "dateOfJoining": "2024-03-11T10:00:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=14",
+      "id": "72d8"
+    },
+    {
+      "userId": 15,
+      "email": "oliver15@example.com",
+      "books": [
+        2,
+        10,
+        11
+      ],
+      "dateOfJoining": "2023-07-17T12:00:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=15",
+      "id": "ddca"
+    },
+    {
+      "userId": 16,
+      "email": "paula70@example.com",
+      "books": [
+        18
+      ],
+      "dateOfJoining": "2024-08-22T08:30:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=16",
+      "id": "deda"
+    },
+    {
+      "userId": 17,
+      "email": "quentin63@example.com",
+      "books": [
+        19,
+        3
+      ],
+      "dateOfJoining": "2025-02-02T09:45:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=17",
+      "id": "0e16"
+    },
+    {
+      "userId": 18,
+      "email": "rachel12@example.com",
+      "books": [
+        2
+      ],
+      "dateOfJoining": "2023-09-09T17:00:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=18",
+      "id": "fca3"
+    },
+    {
+      "userId": 19,
+      "email": "sam48@example.com",
+      "books": [
+        4,
+        8
+      ],
+      "dateOfJoining": "2024-06-30T11:10:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=19",
+      "id": "a058"
+    },
+    {
+      "userId": 20,
+      "email": "tina36@example.com",
+      "books": [
+        6,
+        12
+      ],
+      "dateOfJoining": "2025-01-05T13:40:00.000Z",
+      "avatar": "https://i.pravatar.cc/200?img=20",
+      "id": "fbca"
+    },
+    {
+      "id": "545e",
+      "email": "bubu@example.com",
+      "books": [
+        4
+      ],
+      "dateOfJoining": "2025-10-11T15:40:24.753Z",
+      "avatar": "https://i.pravatar.cc/400?img=23"
+    }
+  ],
+  "booksPool": [
+    {
+      "bookId": 1,
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "genre": "Romance",
+      "id": "869b"
+    },
+    {
+      "bookId": 2,
+      "title": "1984",
+      "author": "George Orwell",
+      "genre": "Dystopian Fiction",
+      "id": "fbdb"
+    },
+    {
+      "bookId": 3,
+      "title": "Sapiens",
+      "author": "Yuval Noah Harari",
+      "genre": "Non-fiction",
+      "id": "0195"
+    },
+    {
+      "bookId": 4,
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "genre": "Fantasy",
+      "id": "5347"
+    },
+    {
+      "bookId": 5,
+      "title": "Dune",
+      "author": "Frank Herbert",
+      "genre": "Science Fiction",
+      "id": "dae8"
+    },
+    {
+      "bookId": 6,
+      "title": "The Alchemist",
+      "author": "Paulo Coelho",
+      "genre": "Fiction",
+      "id": "f515"
+    },
+    {
+      "bookId": 7,
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "genre": "Classic Literature",
+      "id": "00fd"
+    }
+  ]
+}

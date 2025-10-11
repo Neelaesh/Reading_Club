@@ -6,7 +6,7 @@
     "esModuleInterop": true, // Enables emit interoperability between CommonJS and ES Modules
     "experimentalDecorators": true, // Enables experimental support for decorators
     "jsx": "react", // Specifies the JSX code generation
-    "lib": ["dom", "es2015"], // Specifies the library files to be included in the compilation
+    "lib": ["dom", "es2017"], // Specifies the library files to be included in the compilation
     "listFiles": true, // Include files in the compilation
     "module": "ESNext", // Specifies the module code generation
     "moduleResolution": "node", // Specifies the module resolution strategy
