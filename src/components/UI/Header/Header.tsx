@@ -1,16 +1,13 @@
 import React, { useState, useEffect, FC } from "react";
+import BookIcon from "@mui/icons-material/MenuBook";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
+import PeopleIcon from "@mui/icons-material/People";
 import Typography from "@mui/material/Typography";
-import Zoom from "@mui/material/Zoom";
-import {
-  Login as LoginIcon,
-  Logout as LogoutIcon,
-  MenuBook as BookIcon,
-  PersonAdd as PersonAddIcon,
-  People as PeopleIcon,
-} from "@mui/icons-material";
 
+import AddMemberButton from "../Button/AddMember/AddMember";
 import { HeaderProps } from "./Header.types";
 import { memberService } from "../../../services/Members/Members";
 import {
@@ -19,7 +16,6 @@ import {
   LogoSection,
   ActionsSection,
   MemberCountBadge,
-  AddMemberFab,
 } from "./Header.styles";
 import { useAuth } from "../../../contexts/AuthContext/AuthContext";
 
@@ -41,15 +37,15 @@ import { useAuth } from "../../../contexts/AuthContext/AuthContext";
  * @since 1.0.0
  * @version 1.2.0
  */
-export const Header: FC<HeaderProps> = ({ onAddMember }) => {
-  /** Authentication context providing login state and auth functions */
-  const { isAuthenticated, login, logout } = useAuth();
-
+const Header: FC<HeaderProps> = ({ onAddMember }) => {
   /** Current member count from the database */
   const [memberCount, setMemberCount] = useState<number>(0);
 
   /** Loading state for member count fetch operation */
   const [loading, setLoading] = useState(true);
+
+  /** Authentication state and actions */
+  const { isAuthenticated, login, logout } = useAuth();
 
   /**
    * Effect hook to load initial member count on component mount
@@ -179,14 +175,9 @@ export const Header: FC<HeaderProps> = ({ onAddMember }) => {
         </StyledToolbar>
       </StyledAppBar>
 
-      {/* Floating action button for adding members - authenticated users only */}
-      {isAuthenticated && (
-        <Zoom in={isAuthenticated} timeout={300}>
-          <AddMemberFab onClick={onAddMember} aria-label="Add member">
-            <PersonAddIcon />
-          </AddMemberFab>
-        </Zoom>
-      )}
+      <AddMemberButton onAddMember={onAddMember} />
     </>
   );
 };
+
+export default Header;

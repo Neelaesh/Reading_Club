@@ -1,6 +1,6 @@
 // Member-related types and interfaces
 export interface Member {
-  id: string; // JSON-server generated ID (primary key)
+  id?: string; // JSON-server generated ID (primary key)
   email: string;
   books: number[];
   dateOfJoining: string;

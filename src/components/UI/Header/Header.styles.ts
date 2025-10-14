@@ -6,12 +6,10 @@
  * @author Reading Club Development Team
  * @since 1.0.0
  */
-
-import { styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
-import Fab from "@mui/material/Fab";
+import { styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 
 /**
@@ -82,22 +80,5 @@ export const MemberCountBadge = styled(Chip)(({ theme }) => ({
     color: "black",
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(0.5),
-  },
-}));
-
-/**
- * Floating action button for adding new members
- * @description Fixed position FAB in bottom-right corner, visible only when authenticated
- */
-export const AddMemberFab = styled(Fab)(({ theme }) => ({
-  position: "fixed",
-  bottom: theme.spacing(3),
-  right: theme.spacing(3),
-  zIndex: theme.zIndex.fab,
-  backgroundColor: theme.palette.secondary.main,
-  color: theme.palette.secondary.contrastText,
-  "&:hover": {
-    backgroundColor: theme.palette.secondary.dark,
-    transform: "scale(1.1)",
   },
 }));

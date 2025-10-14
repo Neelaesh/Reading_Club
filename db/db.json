@@ -2,197 +2,150 @@
   "members": [
     {
       "email": "alice01@example.com",
-      "books": [
-        1,
-        2
-      ],
+      "books": [1, 2],
       "dateOfJoining": "2024-11-03T09:00:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=1",
       "id": "77cc"
     },
     {
       "email": "bob88@example.com",
-      "books": [
-        6
-      ],
+      "books": [6],
       "dateOfJoining": "2025-02-12T12:00:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=2",
       "id": "57d5"
     },
     {
       "email": "charlie92@example.com",
-      "books": [
-        4,
-        5
-      ],
+      "books": [4, 5],
       "dateOfJoining": "2023-09-25T10:15:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=3",
       "id": "5f04"
     },
     {
       "email": "diana23@example.com",
-      "books": [
-        1
-      ],
+      "books": [1],
       "dateOfJoining": "2024-01-15T14:00:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=4",
       "id": "52dd"
     },
     {
       "email": "ethan77@example.com",
-      "books": [
-        2,
-        7
-      ],
+      "books": [2, 7],
       "dateOfJoining": "2025-03-08T09:30:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=5",
       "id": "d4a5"
     },
     {
       "email": "fiona56@example.com",
-      "books": [
-        6,
-        7,
-        8
-      ],
+      "books": [6, 7, 8],
       "dateOfJoining": "2023-12-20T08:00:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=6",
       "id": "b0d1"
     },
     {
       "email": "george34@example.com",
-      "books": [
-        2
-      ],
+      "books": [2],
       "dateOfJoining": "2024-05-04T11:45:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=7",
       "id": "80dc"
     },
     {
       "email": "hannah19@example.com",
-      "books": [
-        1,
-        2
-      ],
+      "books": [1, 2],
       "dateOfJoining": "2024-09-10T16:00:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=8",
       "id": "feef"
     },
     {
       "email": "ian05@example.com",
-      "books": [
-        6
-      ],
+      "books": [6],
       "dateOfJoining": "2023-08-19T13:20:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=9",
       "id": "b6f6"
     },
     {
       "email": "julia47@example.com",
-      "books": [
-        7,
-        3
-      ],
+      "books": [7, 3],
       "dateOfJoining": "2024-04-02T07:00:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=10",
       "id": "427c"
     },
     {
       "email": "karl99@example.com",
-      "books": [
-        5,
-        2
-      ],
+      "books": [2],
       "dateOfJoining": "2025-01-18T15:30:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=11",
       "id": "6848"
     },
     {
       "email": "linda82@example.com",
-      "books": [
-        7
-      ],
+      "books": [7],
       "dateOfJoining": "2024-10-06T09:00:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=12",
       "id": "fd7d"
     },
     {
       "email": "mike40@example.com",
-      "books": [
-        2,
-        1
-      ],
+      "books": [2, 1],
       "dateOfJoining": "2023-11-29T18:45:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=13",
       "id": "1831"
     },
     {
       "email": "nina28@example.com",
-      "books": [
-        6
-      ],
+      "books": [6],
       "dateOfJoining": "2024-03-11T10:00:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=14",
       "id": "72d8"
     },
     {
       "email": "oliver15@example.com",
-      "books": [
-        1,
-        2,
-        3
-      ],
+      "books": [1, 2, 3],
       "dateOfJoining": "2023-07-17T12:00:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=15",
       "id": "ddca"
     },
     {
       "email": "paula70@example.com",
-      "books": [
-        1
-      ],
+      "books": [1],
       "dateOfJoining": "2024-08-22T08:30:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=16",
       "id": "deda"
     },
     {
       "email": "quentin63@example.com",
-      "books": [
-        2,
-        3
-      ],
+      "books": [2, 3],
       "dateOfJoining": "2025-02-02T09:45:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=17",
       "id": "0e16"
     },
     {
       "email": "rachel12@example.com",
-      "books": [
-        2
-      ],
+      "books": [2],
       "dateOfJoining": "2023-09-09T17:00:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=18",
       "id": "fca3"
     },
     {
       "email": "sam48@example.com",
-      "books": [
-        4,
-        7
-      ],
+      "books": [4, 7],
       "dateOfJoining": "2024-06-30T11:10:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=19",
       "id": "a058"
     },
     {
       "email": "tina36@example.com",
-      "books": [
-        6,
-        2
-      ],
+      "books": [6, 2],
       "dateOfJoining": "2025-01-05T13:40:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=20",
       "id": "fbca"
+    },
+    {
+      "id": "ce55",
+      "email": "dudu@example.com",
+      "books": [4],
+      "dateOfJoining": "2025-10-14T06:23:24.036Z",
+      "avatar": "https://i.pravatar.cc/400?img=21"
     }
   ],
   "books": [

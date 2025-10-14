@@ -8,7 +8,7 @@
  * @since 1.0.0
  */
 import { ApiError, handleResponse } from "../Utility/ApiUtility";
-import { deleteRequest, get, post } from "../../api/methods";
+import { deleteRequest, get, post, put } from "../../api/methods";
 import endPoints from "../../api/endPoints";
 import { Member, MemberFormData } from "../../types/member";
 import { PaginatedResponse, PaginationParams } from "../../types/api";
@@ -146,7 +146,7 @@ export const memberService = {
       ...memberData,
     };
 
-    const response = await post(
+    const response = await put(
       endPoints.updateMemberDetailsEndpoint(id),
       JSON.stringify(updatedMember)
     );
