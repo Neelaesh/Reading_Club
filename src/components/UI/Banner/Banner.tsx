@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+
 import {
   BannerContainer,
   BookIcon,
@@ -7,6 +8,11 @@ import {
   SubTitle,
 } from "./Banner.styles";
 
+/**
+ * @component
+ * @description Banner component that displays the main hero section with animated floating book icons and welcome text
+ * @returns JSX element representing the banner section with gradient text effects and floating animations
+ */
 export const Banner: FC = () => {
   return (
     <BannerContainer>

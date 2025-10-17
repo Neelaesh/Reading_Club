@@ -1,10 +1,10 @@
 import React, {
   createContext,
+  FC,
+  ReactNode,
   useContext,
   useState,
   useEffect,
-  ReactNode,
-  FC,
 } from "react";
 
 import { AuthContextType } from "../../types/authContext";

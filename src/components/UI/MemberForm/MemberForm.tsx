@@ -1,14 +1,4 @@
-/**
- * @fileoverview MemberForm dialog component for adding and editing members
- *
- * This module provides a comprehensive dialog form for member management
- * in the Reading Club application. Supports both adding new members and
- * editing existing ones with real-time validation
- *
- * @version 1.0.0
- * @since 1.0.0
- */
-import React, { useState, useEffect, FC } from "react";
+import React, { useState, useEffect, FC, ChangeEvent } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -41,40 +31,12 @@ import TextInput from "../TextInput/TextInput";
 import { validateMemberForm, isOnlySpaces } from "../../../utils/validation";
 
 /**
- * MemberForm component for creating and editing members
- *
- * A comprehensive dialog form that handles both member creation and editing
- * operations. Features include real-time email validation, book selection with
- * visual chips, smart helper text that appears only when needed, and full
- * error handling with user-friendly feedback.
- *
  * @component
- * @example
- * ```tsx
- * // Adding a new member
- * <MemberForm
- *   open={isDialogOpen}
- *   onClose={() => setIsDialogOpen(false)}
- *   onSubmit={handleCreateMember}
- *   mode="add"
- * />
- *
- * // Editing an existing member
- * <MemberForm
- *   open={isDialogOpen}
- *   onClose={() => setIsDialogOpen(false)}
- *   onSubmit={handleUpdateMember}
- *   member={selectedMember}
- *   mode="edit"
- * />
- * ```
- *
+ * @description MemberForm component for creating and editing members
  * @param props - Component props as defined in MemberFormProps
  * @returns JSX element representing the member form dialog
- *
- * @since 1.0.0
  */
-export const MemberForm: FC<MemberFormProps> = ({
+const MemberForm: FC<MemberFormProps> = ({
   open,
   onClose,
   onSubmit,
@@ -94,11 +56,9 @@ export const MemberForm: FC<MemberFormProps> = ({
   const [isEmailValid, setIsEmailValid] = useState(false);
 
   /**
-   * Fetches all books from the service when the dialog is opened,
-   * providing options for book selection in the member form.
-   *
-   * @async
    * @function loadBooks
+   * @description Fetches all books from the service when the dialog is opened,
+   * providing options for book selection in the member form.
    */
   useEffect(() => {
     const loadBooks = async () => {
@@ -120,8 +80,8 @@ export const MemberForm: FC<MemberFormProps> = ({
   }, [open]);
 
   /**
-   * Initialize form data based on mode and member prop
-   *
+   * @function initializeFormData
+   * @description Initialize form data based on mode and member prop.
    * Sets up the form with either empty data for add mode or
    * existing member data for edit mode. Resets all form state
    * when dialog opens or mode changes.
@@ -144,14 +104,13 @@ export const MemberForm: FC<MemberFormProps> = ({
   }, [member, mode, open]);
 
   /**
-   * Handle email input changes with touch tracking
-   *
+   * @function handleEmailChange
+   * @description Handle email input changes with touch tracking.
    * Updates the email field value and tracks when the user first
    * interacts with the field.
-   *
    * @param event - The change event from the email input
    */
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
 
     // Mark email as touched when user starts typing
@@ -171,12 +130,10 @@ export const MemberForm: FC<MemberFormProps> = ({
   };
 
   /**
-   * Handle email validation status changes
-   *
-   * Updates the email validation state based on real-time validation
+   * @function handleEmailValidationChange
+   * @description Handle email validation state based on real-time validation
    * from the TextInput component. Used to conditionally show/hide
    * helper text based on email validity.
-   *
    * @param isValid - Whether the current email input is valid
    */
   const handleEmailValidationChange = (isValid: boolean) => {
@@ -184,11 +141,10 @@ export const MemberForm: FC<MemberFormProps> = ({
   };
 
   /**
-   * Handle book selection changes
-   *
+   * @function handleBooksChange
+   * @description Handle book selection changes.
    * Updates the selected books array when user makes selections
    * from the multi-select dropdown.
-   *
    * @param event - The change event from the books select component
    */
   const handleBooksChange = (event: SelectChangeEvent<number[]>) => {
@@ -205,9 +161,9 @@ export const MemberForm: FC<MemberFormProps> = ({
   };
 
   /**
-   * Removes a specific book from the member's book selection
+   * @function handleRemoveBook
+   * @description Removes a specific book from the member's book selection
    * when the user clicks the delete button on a book chip.
-   *
    * @param bookId - The ID of the book to remove
    */
   const handleRemoveBook = (bookId: number) => {
@@ -218,12 +174,10 @@ export const MemberForm: FC<MemberFormProps> = ({
   };
 
   /**
-   * Validates the form data, handles submission to the parent component,
+   * @function handleSubmit
+   * @description Validates the form data, handles submission to the parent component,
    * and manages loading states and error handling. Performs client-side
    * validation before attempting submission.
-   *
-   * @async
-   * @function handleSubmit
    */
   const handleSubmit = async () => {
     // Trim email before validation
@@ -260,10 +214,9 @@ export const MemberForm: FC<MemberFormProps> = ({
   };
 
   /**
-   * Filters the available books array to return only the books
-   * that are currently selected in the form. Used for displaying
-   * selected books as chips.
-   *
+   * @function getSelectedBookTitles
+   * @description Filters the available books array to return only the books
+   * that are currently selected in the form.
    * @returns Array of Book objects that are currently selected
    */
   const getSelectedBookTitles = () => {
@@ -297,13 +250,13 @@ export const MemberForm: FC<MemberFormProps> = ({
           {errors.length > 0 && (
             <Fade in={errors.length > 0}>
               <TextAlert
+                mode="add"
                 show={errors.length > 0}
-                text={errors.join(". ")}
                 severity="Error"
+                text={errors.join(". ")}
               />
             </Fade>
           )}
-
           <TextInput
             label="Email"
             type="email"
@@ -323,7 +276,6 @@ export const MemberForm: FC<MemberFormProps> = ({
             }
             autoFocus={mode === "add"}
           />
-
           <FormControl fullWidth disabled={booksLoading || loading}>
             <InputLabel>Books</InputLabel>
             <Select
@@ -345,7 +297,6 @@ export const MemberForm: FC<MemberFormProps> = ({
               ))}
             </Select>
           </FormControl>
-
           {formData.books.length > 0 && (
             <Box>
               <InputLabel shrink sx={{ mb: 1, color: "text.primary" }}>
@@ -408,3 +359,5 @@ export const MemberForm: FC<MemberFormProps> = ({
     </StyledDialog>
   );
 };
+
+export default MemberForm;

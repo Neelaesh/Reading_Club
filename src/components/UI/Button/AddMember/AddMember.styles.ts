@@ -2,7 +2,7 @@ import Fab from "@mui/material/Fab";
 import { styled } from "@mui/material/styles";
 
 /**
- * Floating action button for adding new members
+ * @styled Floating action button for adding new members
  * @description Fixed position FAB in bottom-right corner, visible only when authenticated
  */
 export const AddMemberFab = styled(Fab)(({ theme }) => ({

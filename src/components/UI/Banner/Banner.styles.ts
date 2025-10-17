@@ -1,40 +1,12 @@
-/**
- * @fileoverview Styled components for the Banner component
- *
- * This file contains all styled components used in the Banner component,
- * including animations, gradient backgrounds, and responsive typography.
- * The styles implement the Prime Video dark theme with floating book icons
- * and sophisticated visual effects.
- *
- * Key features:
- * - Floating animation keyframes for book icons
- * - Gradient backgrounds with radial overlays
- * - Responsive typography with clamp() functions
- * - Advanced CSS effects (backdrop blur, text gradients)
- *
- * @author Reading Club Development Team
- * @since 1.0.0
- * @version 1.1.0
- */
-
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { keyframes, styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 
 /**
- * Keyframes animation for floating book icons
- *
- * Creates a smooth up-and-down floating motion that gives life to the
- * decorative book icons scattered throughout the banner background.
- * The animation uses a 3-second duration with ease-in-out timing.
- *
- * @example
- * ```css
- * animation: ${float} 3s ease-in-out infinite;
- * ```
- *
- * @since 1.0.0
+ * @keyframe Keyframes animation for floating book icons
+ * @description Creates a smooth up-and-down floating motion that gives life to the
+ * decorative book icons scattered throughout the banner background
  */
 const float = keyframes`
   0%, 100% {
@@ -46,33 +18,18 @@ const float = keyframes`
 `;
 
 /**
- * Main container for the banner component
- *
- * Creates the primary banner layout with sophisticated gradient backgrounds,
- * radial overlays, and proper spacing. The container uses relative positioning
- * to anchor floating book icons and includes a pseudo-element for additional
- * visual depth with multiple radial gradients.
- *
- * Features:
+ * @styled Container component for the banner section
+ * @description Creates the primary banner layout with sophisticated gradient backgrounds,
+ * radial overlays, and floating book icon positioning. Features multi-layered gradients
+ * and rounded corners for visual appeal.
+ * @features
  * - Multi-layered gradient background using theme colors
  * - Rounded corners (24px border radius)
  * - Subtle border with theme integration
  * - Pseudo-element overlay with multiple radial gradients
  * - Proper z-index stacking for layered effects
- *
  * @param theme - Material-UI theme object for consistent styling
  * @returns Styled Box component with banner container styles
- *
- * @example
- * ```tsx
- * <BannerContainer>
- *   <ContentContainer>
- *     <MainTitle>Welcome</MainTitle>
- *   </ContentContainer>
- * </BannerContainer>
- * ```
- *
- * @since 1.0.0
  */
 export const BannerContainer = styled(Box)(({ theme }) => ({
   position: "relative",
@@ -102,30 +59,17 @@ export const BannerContainer = styled(Box)(({ theme }) => ({
 }));
 
 /**
- * Content container for banner text and main content
- *
- * Centers the banner content and provides proper spacing and layout
+ * @styled Container component for banner content
+ * @description Centers the banner content and provides proper spacing and layout
  * for the main title and subtitle. Uses flexbox for vertical alignment
  * and ensures content appears above background elements with proper z-index.
- *
- * Features:
+ * @features
  * - Centered text alignment
  * - Flexbox column layout with gap spacing
  * - Higher z-index (2) to appear above background elements
  * - Material-UI Container integration for responsive width
- *
  * @param theme - Material-UI theme object for spacing consistency
  * @returns Styled Container component for banner content
- *
- * @example
- * ```tsx
- * <ContentContainer maxWidth="md">
- *   <MainTitle>Title</MainTitle>
- *   <SubTitle>Subtitle</SubTitle>
- * </ContentContainer>
- * ```
- *
- * @since 1.0.0
  */
 export const ContentContainer = styled(Container)(({ theme }) => ({
   position: "relative",
@@ -138,34 +82,21 @@ export const ContentContainer = styled(Container)(({ theme }) => ({
 }));
 
 /**
- * Animated floating book icon component
- *
- * Creates decorative book emoji icons that float around the banner background.
+ * @styled Box component for animated floating book icons
+ * @description Creates decorative book emoji icons that float around the banner background.
  * Each icon can be customized with different positions, sizes, and animation delays
  * to create a dynamic, engaging visual effect without interfering with content.
- *
- * Props:
- * @param delay - Animation delay in seconds (default: 0)
- * @param size - Font size for the emoji in pixels (default: 24)
- * @param top - CSS top position as percentage string (default: '20%')
- * @param left - CSS left position as percentage string (default: '10%')
- *
- * Features:
+ * @features
  * - Floating animation with customizable delay
  * - Absolute positioning for flexible placement
  * - Non-interactive (pointer-events: none, user-select: none)
  * - Themed color with transparency for subtle effect
  * - Z-index 1 to appear behind content but above background
- *
+ * @param delay - Animation delay in seconds (default: 0)
+ * @param size - Font size for the emoji in pixels (default: 24)
+ * @param top - CSS top position as percentage string (default: '20%')
+ * @param left - CSS left position as percentage string (default: '10%')
  * @returns Styled Box component for floating book icons
- *
- * @example
- * ```tsx
- * <BookIcon delay={0.5} size={28} top="15%" left="85%">📚</BookIcon>
- * <BookIcon delay={1.2} size={24} top="60%" left="10%">📖</BookIcon>
- * ```
- *
- * @since 1.0.0
  */
 export const BookIcon = styled(Box)<{
   delay?: number;
@@ -186,31 +117,19 @@ export const BookIcon = styled(Box)<{
 }));
 
 /**
- * Main title component with gradient text effect
- *
- * Creates the primary banner heading with a sophisticated gradient text effect
+ * @styled Typography component for main banner title
+ * @description Creates the primary banner heading with a sophisticated gradient text effect
  * that transitions from text color to primary theme color and back. Uses
  * responsive typography with clamp() for optimal display across all devices.
- *
- * Features:
+ * @features
  * - Responsive font size using clamp() (2.5rem to 4rem)
  * - Gradient text effect with theme color integration
  * - WebKit text fill for cross-browser gradient text support
  * - Bold font weight for strong visual impact
  * - Centered text alignment
  * - Theme spacing for consistent bottom margin
- *
  * @param theme - Material-UI theme object for color and spacing
  * @returns Styled Typography component for main banner title
- *
- * @example
- * ```tsx
- * <MainTitle variant="h1">
- *   Join the Reading Club!
- * </MainTitle>
- * ```
- *
- * @since 1.0.0
  */
 export const MainTitle = styled(Typography)(({ theme }) => ({
   fontSize: "clamp(2.5rem, 5vw, 4rem)",
@@ -227,30 +146,18 @@ export const MainTitle = styled(Typography)(({ theme }) => ({
 }));
 
 /**
- * Subtitle component for banner secondary text
- *
- * Provides the supporting text below the main banner title with softer
+ * @styled Typography component for banner subtitle
+ * @description Provides the supporting text below the main banner title with softer
  * styling and responsive typography. Uses secondary text color for
  * proper visual hierarchy and subtle opacity for refined appearance.
- *
- * Features:
+ * @features
  * - Responsive font size using clamp() (1.2rem to 1.8rem)
  * - Secondary text color for visual hierarchy
  * - Normal font weight (400) for readability
  * - Centered text alignment
  * - Subtle opacity (0.9) for refined appearance
- *
  * @param theme - Material-UI theme object for color consistency
  * @returns Styled Typography component for banner subtitle
- *
- * @example
- * ```tsx
- * <SubTitle variant="h2">
- *   Read Together, Grow Together.
- * </SubTitle>
- * ```
- *
- * @since 1.0.0
  */
 export const SubTitle = styled(Typography)(({ theme }) => ({
   fontSize: "clamp(1.2rem, 3vw, 1.8rem)",

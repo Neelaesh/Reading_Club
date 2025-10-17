@@ -1,24 +1,8 @@
 /**
- * @fileoverview Type definitions for Header component
- *
- * This file contains TypeScript interface definitions for the Header component
- * and related type exports.
- *
- * @author Reading Club Development Team
- * @since 1.0.0
- * @version 1.2.0
- */
-
-/**
- * Props interface for the Header component
- *
+ * Props interface for Header component
  * @interface HeaderProps
  */
 export interface HeaderProps {
-  /**
-   * Callback function triggered when the add member button is clicked
-   *
-   * @returns void - No return value expected
-   */
+  /** Callback when add member button is clicked */
   onAddMember: () => void;
 }
