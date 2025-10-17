@@ -7,7 +7,7 @@ import "@fontsource/inter/400.css"; // Regular
 import "@fontsource/inter/500.css"; // Medium
 import "@fontsource/inter/700.css"; // Bold
 
-import App from "./App/App";
+import App from "./components/App/App";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement!);

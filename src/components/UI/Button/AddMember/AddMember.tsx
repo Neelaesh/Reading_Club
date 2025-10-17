@@ -6,6 +6,11 @@ import { AddMemberFab } from "./AddMember.styles";
 import { AddMemberProps } from "./AddMember.types";
 import { useAuth } from "../../../../contexts/AuthContext/AuthContext";
 
+/**
+ * @component
+ * @description Button Component for adding a new member
+ * @returns JSX element representing the add member button
+ */
 const AddMember: FC<AddMemberProps> = ({ onAddMember }) => {
   const { isAuthenticated } = useAuth();
 

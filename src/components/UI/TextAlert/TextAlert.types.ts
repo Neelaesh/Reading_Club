@@ -1,38 +1,27 @@
-/**
- * @fileoverview Type definitions for TextAlert component
- *
- * This file contains TypeScript type definitions for the TextAlert component
- * and related exports.
- *
- * @author Reading Club Development Team
- * @since 1.0.0
- * @version 1.1.0
- */
-
 import { ReactNode } from "react";
 
 /**
- * Union type defining the available alert severity levels
- *
- * @typedef {string} SeverityType
+ * @type Severity levels
+ * @typedef {("Info" | "Error" | "Success" | "Warning")} SeverityType
+ * @description Defines the severity levels for alerts
  */
 type SeverityType = "Info" | "Error" | "Success" | "Warning";
 
 /**
- * Props interface for the TextAlert component
- *
- * Defines the required properties for displaying contextual alert messages
- * with different severity levels.
- *
  * @interface TextAlertProps
+ * @description Props interface for TextAlert component
  */
 export interface TextAlertProps {
-  /** Controls the visibility of the alert component */
-  show: boolean;
-  /** The message text to display in the alert */
-  text: string;
-  /** The severity level of the alert */
-  severity: SeverityType;
   /** Optional React children elements */
   children?: ReactNode;
+  /** Callback when the alert is closed */
+  onClose?: () => void;
+  /** Operation mode (add or edit) */
+  mode?: "add" | "edit";
+  /** Alert severity level */
+  severity: SeverityType;
+  /** Whether the alert is visible */
+  show: boolean;
+  /** Alert message text */
+  text: string | null;
 }

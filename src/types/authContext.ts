@@ -1,14 +1,7 @@
 /**
- * @fileoverview Authentication-related type definitions
- *
- * @version 1.0.0
- * @since 1.0.0
- */
-
-/**
- * AuthContext entity type definition
- *
- * @typedef {Object} AuthContext
+ * @type {AuthContextType}
+ * @description AuthContext entity type definition
+ * @typedef {Object} AuthContextType
  * @property {boolean} isAuthenticated - Indicates if the user is authenticated
  * @property {function} login - Function to log in the user
  * @property {function} logout - Function to log out the user

@@ -1,20 +1,11 @@
-/**
- * @fileoverview Member service module for the Reading Club application
- * @description This module provides comprehensive member management functionality including
- * CRUD operations, pagination support, and member statistics. It serves as the primary
- * interface for all member-related API operations.
- *
- * @author Reading Club Development Team
- * @since 1.0.0
- */
 import { ApiError, handleResponse } from "../Utility/ApiUtility";
-import { deleteRequest, get, post, put } from "../../api/methods";
+import { deleteRequest, get, patch, post } from "../../api/methods";
 import endPoints from "../../api/endPoints";
 import { Member, MemberFormData } from "../../types/member";
 import { PaginatedResponse, PaginationParams } from "../../types/api";
 
 /**
- * Member service object containing all member-related API operations
+ * @service Member service object containing all member-related API operations
  * @namespace memberService
  * @description Provides a centralized interface for managing Reading Club members.
  * Supports full CRUD operations, pagination, and member statistics.
@@ -124,8 +115,9 @@ export const memberService = {
   /**
    * Updates an existing member's information
    *
-   * @description Modifies an existing member's data while preserving fields not included
-   * in the update. Useful for editing member profiles or updating reading lists.
+   * @description Efficiently updates member data by sending only the changed fields to the server.
+   * The server handles merging with existing data, eliminating the need for a separate fetch operation.
+   * This approach reduces API calls and improves performance.
    *
    * @param {string} id - The unique identifier of the member to update
    * @param {MemberFormData} memberData - The updated member information
@@ -138,17 +130,11 @@ export const memberService = {
    * @throws {Error} May throw other errors for network issues or parsing failures
    */
   async updateMember(id: string, memberData: MemberFormData): Promise<Member> {
-    // Get existing member to preserve other fields
-    const existingMember = await this.getMemberById(id);
-
-    const updatedMember: Member = {
-      ...existingMember,
-      ...memberData,
-    };
-
-    const response = await put(
+    // ✅ Send only the fields to update - let server handle merge
+    // This eliminates the unnecessary getMemberById call, reducing API requests by 50%
+    const response = await patch(
       endPoints.updateMemberDetailsEndpoint(id),
-      JSON.stringify(updatedMember)
+      JSON.stringify(memberData)
     );
 
     return handleResponse<Member>(response);

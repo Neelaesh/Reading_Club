@@ -1,46 +1,12 @@
-/**
- * @fileoverview Reusable TextInput component with Material-UI TextField
- *
- * A standardized text input component that wraps Material-UI TextField
- * with consistent styling and common functionality for form inputs
- * throughout the Reading Club application.
- *
- * @version 1.0.0
- * @since 1.0.0
- */
-
-import React, { FC } from "react";
+import React, { ChangeEvent, FC } from "react";
 import TextField from "@mui/material/TextField";
 import { TextInputProps } from "./TextInput.types";
 
 /**
- * TextInput component for consistent form inputs
- *
- * Provides a standardized text input with Material-UI TextField as the base,
- * including common props and styling patterns used across the application.
- * Helper text is automatically styled in red when error state is true.
- * For email type inputs, validates against allowed characters to prevent
- * invalid characters from being typed.
- *
  * @component
- * @example
- * ```tsx
- * <TextInput
- *   label="Email"
- *   type="email"
- *   value={email}
- *   onChange={handleEmailChange}
- *   disabled={isLoading}
- *   helperText="Enter a valid email address"
- *   error={hasError}
- *   autoFocus
- * />
- * ```
- *
- * @param props - TextInput component props
- * @returns JSX element representing the text input field
- *
- * @since 1.0.0
+ * @description TextInput component for handling user text input with validation
+ * @param props - Component props as defined in TextInputProps
+ * @returns JSX element representing a Material-UI TextField with custom validation
  */
 export const TextInput: FC<TextInputProps> = ({
   label,
@@ -59,15 +25,13 @@ export const TextInput: FC<TextInputProps> = ({
   ...otherProps
 }) => {
   /**
-   * Handle input change with validation for email type
-   *
+   * @function handleInputChange
+   * @description Handle input change with validation for email type.
    * For email inputs, validates against regex pattern to prevent
-   * invalid characters from being typed. Only allows characters
-   * that are valid for email addresses.
-   *
+   * invalid characters from being typed and provides real-time validation feedback.
    * @param event - The change event from the input element
    */
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
 
     // Email validation regex - only allow valid email characters

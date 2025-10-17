@@ -2,11 +2,11 @@
   "compilerOptions": {
     "allowJs": true, // Allows JavaScript files to be compiled
     "allowSyntheticDefaultImports": true, // Allows default imports from modules with no default export
-    "declaration": true, // Generates corresponding '.d.ts' file
+    //"declaration": true, // Generates corresponding '.d.ts' file
     "esModuleInterop": true, // Enables emit interoperability between CommonJS and ES Modules
     "experimentalDecorators": true, // Enables experimental support for decorators
     "jsx": "react", // Specifies the JSX code generation
-    "lib": ["dom", "es2017"], // Specifies the library files to be included in the compilation
+    "lib": ["DOM", "ES2017", "ES2022"], // Specifies the library files to be included in the compilation
     "listFiles": true, // Include files in the compilation
     "module": "ESNext", // Specifies the module code generation
     "moduleResolution": "node", // Specifies the module resolution strategy
@@ -16,8 +16,9 @@
     "sourceMap": true, // Generates corresponding '.map' file
     "strict": true, // Enable all strict type-checking options
     "target": "es5", // Specifies the ECMAScript target version
-    "typeRoots": ["../node_modules/@types", "./types"] // Specifies the root folders for type definitions
-    //"types": ["jest", "node", "@testing-library/jest-dom"], // Specifies type definitions to be included
+    "typeRoots": ["./node_modules/@types", "./types"], // Specifies the root folders for type definitions
+    "types": ["jest", "node", "@testing-library/jest-dom"] // Specifies type definitions to be included
+    //"types": ["jest", "node"]
   },
   "include": [
     "./src/index.tsx",

@@ -1,11 +1,3 @@
-/**
- * @fileoverview Styled components for the Header component
- * @description Contains all styled component definitions for the Reading Club header,
- * including AppBar, Toolbar, sections, badges, and floating action button styles.
- *
- * @author Reading Club Development Team
- * @since 1.0.0
- */
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
@@ -13,7 +5,7 @@ import { styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 
 /**
- * Styled AppBar component with custom theming
+ * @styled AppBar component with custom theming
  * @description Creates a fixed header with custom background, no shadow, and border styling
  */
 export const StyledAppBar = styled(AppBar)(({ theme }) => ({
@@ -27,7 +19,7 @@ export const StyledAppBar = styled(AppBar)(({ theme }) => ({
 }));
 
 /**
- * Styled Toolbar component with flex layout
+ * @styled Toolbar component with flex layout
  * @description Creates a toolbar with space-between layout and custom padding
  */
 export const StyledToolbar = styled(Toolbar)(({ theme }) => ({
@@ -39,8 +31,8 @@ export const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 }));
 
 /**
- * Logo section container with flex layout
- * @description Container for the logo icon and Reading Club title
+ * @styled Box component for logo section container
+ * @description Container for the logo icon and Reading Club title with flex layout
  */
 export const LogoSection = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -49,8 +41,8 @@ export const LogoSection = styled(Box)(({ theme }) => ({
 }));
 
 /**
- * Actions section container for right-side header elements
- * @description Container for member count badge and login/logout button
+ * @styled Box component for actions section container
+ * @description Container for member count badge and login/logout button with flex layout
  */
 export const ActionsSection = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -59,8 +51,8 @@ export const ActionsSection = styled(Box)(({ theme }) => ({
 }));
 
 /**
- * Styled member count badge with custom styling
- * @description White background chip displaying total member count with proper spacing
+ * @styled Chip component for member count badge
+ * @description White background chip displaying total member count with custom styling and spacing
  */
 export const MemberCountBadge = styled(Chip)(({ theme }) => ({
   backgroundColor: "white",

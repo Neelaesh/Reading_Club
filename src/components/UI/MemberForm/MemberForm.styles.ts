@@ -1,14 +1,3 @@
-/**
- * @fileoverview Styled components for the MemberForm dialog component
- *
- * @description Contains all styled component definitions used in the member
- * form dialog, including the dialog container, form layout, book chip display,
- * and loading states.
- *
- * @version 1.0.0
- * @since 1.0.0
- */
-
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Dialog from "@mui/material/Dialog";
@@ -16,7 +5,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { styled } from "@mui/material/styles";
 
 /**
- * Styled Dialog component with custom paper styling
+ * @styled Dialog component with custom paper styling
  * @description Provides a modal dialog with rounded corners, fixed dimensions,
  */
 export const StyledDialog = styled(Dialog)(({ theme }) => ({
@@ -30,10 +19,8 @@ export const StyledDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 /**
- * Styled DialogTitle component with enhanced layout and styling
- * @description Creates a dialog header with flex layout for title and action elements,
- * includes proper spacing and a bottom border for visual separation.
- * Typically contains the dialog title and close button.
+ * @styled DialogTitle component with enhanced layout and styling
+ * @description Creates a dialog header with dialog title and close button
  */
 export const DialogTitleStyled = styled(DialogTitle)(({ theme }) => ({
   display: "flex",
@@ -44,7 +31,7 @@ export const DialogTitleStyled = styled(DialogTitle)(({ theme }) => ({
 }));
 
 /**
- * Form container with vertical layout and consistent spacing
+ * @styled Form container with vertical layout and consistent spacing
  * @description Provides a flex column layout for form elements with proper spacing between fields.
  */
 export const FormContainer = styled(Box)(({ theme }) => ({
@@ -55,9 +42,8 @@ export const FormContainer = styled(Box)(({ theme }) => ({
 }));
 
 /**
- * Scrollable container for displaying book chips
- * @description Creates a flex-wrap container for book selection chips with
- * scroll capability when content exceeds the maximum height.
+ * @styled Scrollable container for displaying book chips
+ * @description Creates a flex-wrap container for book selection chips with scroll capability
  */
 export const BookChipContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -72,9 +58,8 @@ export const BookChipContainer = styled(Box)(({ theme }) => ({
 }));
 
 /**
- * Animated chip component with hover effects
- * @description Extends the Chip component with smooth scale transition and shadow effects on hover.
- * Used for interactive book selection within the member form to provide visual feedback.
+ * @styled Animated chip component with hover effects
+ * @description Extends the Chip component with smooth scale transition and shadow effects on hover
  */
 export const AnimatedChip = styled(Chip)(({ theme }) => ({
   transition: "all 0.3s ease-in-out",
@@ -85,9 +70,8 @@ export const AnimatedChip = styled(Chip)(({ theme }) => ({
 }));
 
 /**
- * Centered loading state container
- * @description Creates a flex container for displaying loading indicators and
- * related content with proper centering and spacing.
+ * @styled Centered loading state container
+ * @description Creates a flex container for displaying loading indicators and related content
  */
 export const LoadingContainer = styled(Box)(({ theme }) => ({
   display: "flex",

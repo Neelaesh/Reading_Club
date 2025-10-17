@@ -1,10 +1,15 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import Alert from "@mui/material/Alert";
 import { AlertColor } from "@mui/material/Alert";
+
 import { TextAlertProps } from "./TextAlert.types";
 
-const TextAlert = React.forwardRef<HTMLDivElement, TextAlertProps>(
-  ({ show, text, severity }, ref) => {
+/**
+ * @component
+ * @description Text alert component for displaying contextual messages
+ */
+const TextAlert = forwardRef<HTMLDivElement, TextAlertProps>(
+  ({ onClose, mode, show, severity, text }, ref) => {
     if (!show) return null;
 
     // Map component severity to MUI severity
@@ -17,9 +22,11 @@ const TextAlert = React.forwardRef<HTMLDivElement, TextAlertProps>(
 
     return (
       <Alert
-        ref={ref} // Forwards the ref from Fade to the Alert DOM element
-        severity={severityMap[severity]}
         data-testid={`text-alert-${severity.toLowerCase()}`}
+        onClose={onClose}
+        severity={severityMap[severity]}
+        sx={{ mb: mode === "add" || mode === "edit" ? 0 : 3 }}
+        ref={ref} // Forwards the ref from Fade to the Alert DOM element
       >
         {text}
       </Alert>
