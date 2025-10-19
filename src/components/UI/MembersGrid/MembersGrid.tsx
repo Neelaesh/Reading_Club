@@ -163,11 +163,13 @@ const MemberCardComponent: FC<MemberCardProps> = ({
               }
               placement="top"
               arrow
-              PopperProps={{
-                sx: {
-                  "& .MuiTooltip-tooltip": {
-                    maxWidth: 300,
-                    backgroundColor: "rgba(0, 0, 0, 0.9)",
+              slotProps={{
+                popper: {
+                  sx: {
+                    "& .MuiTooltip-tooltip": {
+                      maxWidth: 300,
+                      backgroundColor: "rgba(0, 0, 0, 0.9)",
+                    },
                   },
                 },
               }}

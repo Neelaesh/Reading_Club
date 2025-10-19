@@ -121,3 +121,44 @@ export const MainIllustration = styled(Box)(({ theme }) => ({
   zIndex: 2,
   marginBottom: theme.spacing(2),
 }));
+
+/**
+ * @styled Typography component for main title
+ * @description Styles the main title text with margin and font weight
+ */
+export const MainTitle = styled(Typography)(({ theme }) => ({
+  marginBottom: theme.spacing(2),
+  fontWeight: 600,
+}));
+
+/**
+ * @styled Typography component for subtitle text
+ * @description Styles the subtitle text with margin, max width, and line height for readability
+ */
+export const Subtitle = styled(Typography)(({ theme }) => ({
+  marginBottom: theme.spacing(4),
+  maxWidth: 600,
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  lineHeight: 1.6,
+}));
+
+/**
+ * @styled Box component for action section container
+ * @description Centers the action buttons and provides top margin spacing
+ */
+export const ActionSection = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: theme.spacing(4),
+}));
+
+/**
+ * @styled Box component for large icon display
+ * @description Styles large icons used in action cards with size and color
+ */
+export const IconLarge = styled(Box)(({ theme }) => ({
+  fontSize: 48,
+  color: theme.palette.primary.main,
+  marginBottom: theme.spacing(2),
+}));

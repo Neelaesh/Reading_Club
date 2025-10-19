@@ -19,6 +19,10 @@ import {
   ActionCard,
   GradientText,
   MainIllustration,
+  MainTitle,
+  Subtitle,
+  ActionSection,
+  IconLarge,
 } from "./PageNotFound.styles";
 import { useAuth } from "../../../contexts/AuthContext/AuthContext";
 
@@ -75,41 +79,26 @@ const PageNotFound: FC = () => {
 
               <Box sx={{ mt: 2 }}>
                 <GradientText variant="h1">404</GradientText>
-                <Typography
-                  variant="h4"
-                  component="h2"
-                  color="text.primary"
-                  sx={{ mb: 2, fontWeight: 600 }}
-                >
+                <MainTitle variant="h4" color="text.primary">
                   Page Not Found
-                </Typography>
-                <Typography
-                  variant="h6"
-                  color="text.secondary"
-                  sx={{ mb: 4, maxWidth: 600, mx: "auto", lineHeight: 1.6 }}
-                >
+                </MainTitle>
+                <Subtitle variant="h6" color="text.secondary">
                   Oops! It looks like this page got lost in the library. The
                   page you&apos;re looking for doesn&apos;t exist or has been
                   moved.
-                </Typography>
+                </Subtitle>
               </Box>
             </MainIllustration>
 
             {/* Navigation Actions */}
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                mt: 4,
-              }}
-            >
+            <ActionSection>
               {/* Primary Actions */}
               <Fade in={true} timeout={1200}>
                 <ActionCard sx={{ maxWidth: 600 }}>
                   <CardContent sx={{ textAlign: "center", p: 3 }}>
-                    <HomeIcon
-                      sx={{ fontSize: 48, color: "primary.main", mb: 2 }}
-                    />
+                    <IconLarge>
+                      <HomeIcon />
+                    </IconLarge>
                     <Typography variant="h6" gutterBottom>
                       Go Home
                     </Typography>
@@ -133,7 +122,7 @@ const PageNotFound: FC = () => {
                   </CardContent>
                 </ActionCard>
               </Fade>
-            </Box>
+            </ActionSection>
 
             {/* Help Text */}
             <Typography
