@@ -24,7 +24,7 @@ const prodConfig = () => {
     module: {
       rules: [
         {
-          test: /\.(woff(2))?|ttf|eot)$/, // Match font files
+          test: /\.(woff(2)?|ttf|eot)$/, // Match font files
           type: "asset/resource", // Use asset/resource for font files
           generator: {
             filename: "fonts/[name][ext]", // Output path for font files
