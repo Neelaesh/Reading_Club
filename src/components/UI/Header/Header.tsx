@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from "react";
+import React, { FC } from "react";
 import BookIcon from "@mui/icons-material/MenuBook";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
@@ -7,9 +7,6 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import PeopleIcon from "@mui/icons-material/People";
 import Typography from "@mui/material/Typography";
 
-import AddMemberButton from "../Button/AddMember/AddMember";
-import { HeaderProps } from "./Header.types";
-import { memberService } from "../../../services/Members/Members";
 import {
   StyledAppBar,
   StyledToolbar,
@@ -18,48 +15,19 @@ import {
   MemberCountBadge,
 } from "./Header.styles";
 import { useAuth } from "../../../contexts/AuthContext/AuthContext";
+import { useMemberCount } from "../../../contexts/MemberCountContext";
 
 /**
- * @component
+ * @component Header
  * @description Header component for navigation and member management
- * @param props - Component props as defined in HeaderProps
  * @returns JSX element representing the application header
  */
-const Header: FC<HeaderProps> = ({ onAddMember }) => {
-  /** Current member count from the database */
-  const [memberCount, setMemberCount] = useState<number>(0);
-
-  /** Loading state for member count fetch operation */
-  const [loading, setLoading] = useState(true);
-
+const Header: FC = () => {
   /** Authentication state and actions */
   const { isAuthenticated, login, logout } = useAuth();
 
-  /**
-   * @function loadMemberCount
-   * @description Fetches the current member count from the member service
-   * and updates the component state. Handles loading states and error scenarios.
-   */
-  useEffect(() => {
-    /**
-     * @function loadMemberCount
-     * @description Asynchronous function to load member count from the API
-     * and handle loading states with error management.
-     */
-    const loadMemberCount = async () => {
-      try {
-        setLoading(true);
-        const count = await memberService.getMemberCount();
-        setMemberCount(count);
-      } catch (error) {
-        console.error("Failed to load member count:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadMemberCount();
-  }, []);
+  /** Member count state and actions from context */
+  const { memberCount, loading } = useMemberCount();
 
   /**
    * @function handleAuthClick
@@ -74,34 +42,6 @@ const Header: FC<HeaderProps> = ({ onAddMember }) => {
       login();
     }
   };
-
-  /**
-   * @function updateMemberCount
-   * @description Updates the member count display with fresh data from the API.
-   * Can be called after member operations to ensure the header displays
-   * the most current member count with proper error handling.
-   */
-  const updateMemberCount = async () => {
-    try {
-      const count = await memberService.getMemberCount();
-      setMemberCount(count);
-    } catch (error) {
-      console.error("Failed to update member count:", error);
-    }
-  };
-
-  /**
-   * @function exposeUpdateFunction
-   * @description Exposes updateMemberCount function globally via window object.
-   * Makes the function available for other components to trigger member count
-   * updates after performing member operations.
-   */
-  useEffect(() => {
-    // Store the update function to be called after member operations
-    (
-      window as typeof window & { updateMemberCount?: () => Promise<void> }
-    ).updateMemberCount = updateMemberCount;
-  }, []);
 
   return (
     <>
@@ -141,8 +81,6 @@ const Header: FC<HeaderProps> = ({ onAddMember }) => {
           </ActionsSection>
         </StyledToolbar>
       </StyledAppBar>
-
-      <AddMemberButton onAddMember={onAddMember} />
     </>
   );
 };

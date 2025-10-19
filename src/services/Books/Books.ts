@@ -1,19 +1,9 @@
-/**
- * @fileoverview Book service module for the Reading Club application
- * @description This module provides book management functionality including
- * fetching individual books, collections of books, and batch operations.
- * It serves as the primary interface for all book-related API operations.
- *
- * @author Reading Club Development Team
- * @since 1.0.0
- */
-
 import { Book } from "../../types/book";
 import endPoints from "../../api/endPoints";
 import { handleResponse } from "../Utility/ApiUtility";
 
 /**
- * Book service object containing all book-related API operations
+ * @service Book service object containing all book-related API operations
  * @namespace bookService
  * @description Provides a centralized interface for managing Reading Club books.
  * Supports fetching individual books, all books, and batch operations for multiple books.

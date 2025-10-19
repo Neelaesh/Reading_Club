@@ -6,6 +6,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import { AuthProvider } from "../../contexts/AuthContext/AuthContext";
 import { applicationTheme } from "../../theme/applicationTheme";
 import AppRouter from "../../router/AppRouter";
+import { Header } from "../UI/Header";
+import { MemberCountProvider } from "../../contexts/MemberCountContext";
 
 /**
  * @component
@@ -16,9 +18,12 @@ const App: FC = () => {
     <ThemeProvider theme={applicationTheme}>
       <CssBaseline />
       <AuthProvider>
-        <Router>
-          <AppRouter />
-        </Router>
+        <MemberCountProvider>
+          <Router>
+            <Header />
+            <AppRouter />
+          </Router>
+        </MemberCountProvider>
       </AuthProvider>
     </ThemeProvider>
   );

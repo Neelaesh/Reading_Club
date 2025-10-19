@@ -1,13 +1,3 @@
-/**
- * @fileoverview API endpoint configuration for the Reading Club application
- * @description This module centralizes all API endpoint definitions used throughout the application.
- * It provides a single source of truth for API URLs and endpoint generators with support for
- * pagination, sorting, and CRUD operations.
- *
- * @author Reading Club Development Team
- * @since 1.0.0
- */
-
 import { PaginationParams } from "../types/api";
 
 /**

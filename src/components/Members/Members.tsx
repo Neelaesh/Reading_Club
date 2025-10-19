@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from "react";
+import React, { useState, useEffect, useCallback, FC } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -15,6 +15,7 @@ import Fade from "@mui/material/Fade";
 import Tooltip from "@mui/material/Tooltip";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
+import AddMemberButton from "../UI/Button/AddMember/AddMember";
 import {
   ActionButton,
   BooksContainer,
@@ -29,7 +30,6 @@ import {
 } from "./Members.styles";
 import { Banner } from "../UI/Banner/Banner";
 import { formatDateOfJoining, sortMembersByDateDesc } from "../../utils/member";
-import { Header } from "../UI/Header";
 import {
   INITIAL_MEMBERS_COUNT,
   LOAD_MORE_INCREMENT,
@@ -40,32 +40,31 @@ import { memberService } from "../../services/Members/Members";
 import { PaginatedResponse } from "../../types/api";
 import { TextAlert } from "../UI/TextAlert";
 import { useAuth } from "../../contexts/AuthContext/AuthContext";
+import { useMemberCount } from "../../contexts/MemberCountContext";
 
 /**
- * @component
+ * @component Members
  * @description Members component for displaying and managing reading club members
  * with pagination, CRUD operations, and responsive grid layout
  * @returns JSX element representing the members management page
  */
 const Members: FC = () => {
   const { isAuthenticated } = useAuth();
+  const { setMemberCount, decrementMemberCount, incrementMemberCount } =
+    useMemberCount();
 
   const [allMembers, setAllMembers] = useState<Member[]>([]);
   const [displayedMembers, setDisplayedMembers] = useState<Member[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
   const [showError, setShowError] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [hasMore, setHasMore] = useState(true);
-  const [formOpen, setFormOpen] = useState(false);
+  const [memberFormOpen, setMemberFormOpen] = useState(false);
+  const [formMode, setFormMode] = useState<"add" | "edit">("add");
   const [editingMember, setEditingMember] = useState<Member | null>(null);
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [memberToDelete, setMemberToDelete] = useState<Member | null>(null);
-  const [formMode, setFormMode] = useState<"add" | "edit">("add");
-
-  useEffect(() => {
-    loadInitialData();
-  }, []);
 
   /**
    * @function loadInitialData
@@ -73,7 +72,7 @@ const Members: FC = () => {
    * Fetches all members, sorts them by date descending, and displays the initial
    * count while determining if more members are available for pagination.
    */
-  const loadInitialData = async () => {
+  const loadInitialData = useCallback(async () => {
     try {
       setLoading(true);
       setShowError(false);
@@ -95,6 +94,9 @@ const Members: FC = () => {
       setAllMembers(sortedMembers);
       setDisplayedMembers(sortedMembers.slice(0, INITIAL_MEMBERS_COUNT));
       setHasMore(sortedMembers.length > INITIAL_MEMBERS_COUNT);
+
+      // Update member count context with the total count
+      setMemberCount(sortedMembers.length);
     } catch (err) {
       console.error("Failed to load data:", err);
       setShowError(true);
@@ -102,7 +104,24 @@ const Members: FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [setMemberCount]);
+
+  useEffect(() => {
+    loadInitialData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  /**
+   * @function handleAddMember
+   * @description Initialize the member form for adding a new member.
+   * Sets the form mode to "add", clears any existing member data,
+   * and opens the member form dialog for user input.
+   */
+  const handleAddMember = useCallback(() => {
+    setFormMode("add");
+    setEditingMember(null);
+    setMemberFormOpen(true);
+  }, []);
 
   /**
    * @function loadMoreMembers
@@ -138,18 +157,6 @@ const Members: FC = () => {
   };
 
   /**
-   * @function handleAddMember
-   * @description Initialize the member form for adding a new member.
-   * Sets the form mode to "add", clears any existing member data,
-   * and opens the member form dialog for user input.
-   */
-  const handleAddMember = () => {
-    setFormMode("add");
-    setEditingMember(null);
-    setFormOpen(true);
-  };
-
-  /**
    * @function handleEditMember
    * @description Initialize the member form for editing an existing member.
    * Checks authentication status, sets form mode to "edit", populates
@@ -160,7 +167,7 @@ const Members: FC = () => {
     if (!isAuthenticated) return;
     setFormMode("edit");
     setEditingMember(member);
-    setFormOpen(true);
+    setMemberFormOpen(true);
   };
 
   /**
@@ -209,12 +216,7 @@ const Members: FC = () => {
       setMemberToDelete(null);
 
       // Update member count
-      const updateMemberCount = (
-        window as typeof window & { updateMemberCount?: () => Promise<void> }
-      ).updateMemberCount;
-      if (updateMemberCount) {
-        updateMemberCount();
-      }
+      decrementMemberCount();
     } catch (err) {
       console.error("Failed to delete member:", err);
       setShowError(true);
@@ -246,6 +248,9 @@ const Members: FC = () => {
 
         // Update hasMore status
         setHasMore(updatedAllMembers.length > currentDisplayCount);
+
+        // Update member count
+        incrementMemberCount();
       } else if (editingMember?.id) {
         const updatedMember = await memberService.updateMember(
           editingMember.id,
@@ -263,16 +268,8 @@ const Members: FC = () => {
           )
         );
       }
-      setFormOpen(false);
+      setMemberFormOpen(false);
       setEditingMember(null);
-
-      // Update member count
-      const updateMemberCount = (
-        window as typeof window & { updateMemberCount?: () => Promise<void> }
-      ).updateMemberCount;
-      if (updateMemberCount) {
-        updateMemberCount();
-      }
     } catch (err) {
       throw err; // Let the form handle the error
     }
@@ -280,187 +277,186 @@ const Members: FC = () => {
 
   if (loading) {
     return (
-      <>
-        <Header onAddMember={handleAddMember} />
-        <MainContainer>
-          <LoadingContainer>
-            <CircularProgress size={48} />
-            <Typography variant="h6" color="textSecondary">
-              Loading members...
-            </Typography>
-          </LoadingContainer>
-        </MainContainer>
-      </>
+      <MainContainer>
+        <LoadingContainer>
+          <CircularProgress size={48} />
+          <Typography variant="h6" color="textSecondary">
+            Loading members...
+          </Typography>
+        </LoadingContainer>
+      </MainContainer>
     );
   }
-
   return (
-    <>
-      <Header onAddMember={handleAddMember} />
-      <MainContainer maxWidth="xl">
-        <Banner />
+    <MainContainer maxWidth="xl">
+      <Banner />
 
-        {/** Error alert */}
-        {showError && (
-          <Fade in={!!error}>
-            <TextAlert
-              show={showError}
-              severity="Error"
-              text={error}
-              onClose={() => {
-                setShowError(false);
-                setError(null);
-              }}
-            />
-          </Fade>
-        )}
+      {/** Page header with title and actions */}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          mb: 3,
+          mt: 2,
+        }}
+      >
+        {isAuthenticated && <AddMemberButton onAddMember={handleAddMember} />}
+      </Box>
 
-        {/** Members grid */}
-        <Grid container spacing={3}>
-          {displayedMembers.map((member: Member, index: number) => (
-            <Grid
-              size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
-              key={member.id || index}
-            >
-              <Grow in={true} timeout={500 + index * 100}>
-                <MemberCard>
-                  <MemberImage
-                    image={
-                      member.avatar ||
-                      `https://i.pravatar.cc/400?img=${(0 % 70) + 1}`
-                    }
-                    //title={member.email}
-                  >
-                    <MemberOverlay className="member-overlay" />
-                    {isAuthenticated && (
-                      <MemberActions className="member-actions">
-                        <Tooltip title="Edit Member">
-                          <ActionButton
-                            size="small"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleEditMember(member);
-                            }}
-                          >
-                            <EditIcon fontSize="small" />
-                          </ActionButton>
-                        </Tooltip>
-                        <Tooltip title="Delete Member">
-                          <ActionButton
-                            size="small"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDeleteClick(member);
-                            }}
-                          >
-                            <DeleteIcon fontSize="small" />
-                          </ActionButton>
-                        </Tooltip>
-                      </MemberActions>
-                    )}
-                    <BooksContainer className="member-books">
-                      <Typography
-                        variant="body1"
-                        component="span"
-                        sx={{
-                          color: "#00A8E1",
-                          fontWeight: "bold",
-                          fontSize: "14px",
-                        }}
-                      >
-                        {member.books.length}{" "}
-                        {member.books.length === 1 ? "Book" : "Books"}
-                      </Typography>
-                    </BooksContainer>
-                  </MemberImage>
+      {/** Error alert */}
+      {showError && (
+        <Fade in={!!error}>
+          <TextAlert
+            show={showError}
+            severity="Error"
+            text={error}
+            onClose={() => {
+              setShowError(false);
+              setError(null);
+            }}
+          />
+        </Fade>
+      )}
 
-                  <MemberInfo>
-                    <Box>
-                      <Typography variant="h6" component="h3" noWrap>
-                        {member.email}
-                      </Typography>
-                      <Typography variant="body2" color="textSecondary">
-                        Member since {formatDateOfJoining(member.dateOfJoining)}
-                      </Typography>
-                    </Box>
-                  </MemberInfo>
-                </MemberCard>
-              </Grow>
-            </Grid>
-          ))}
-        </Grid>
-        {/** No members found message */}
-        {displayedMembers.length === 0 && !loading && (
-          <Box textAlign="center" py={8}>
-            <Typography variant="h5" color="textSecondary" gutterBottom>
-              No members found
-            </Typography>
-            <Typography variant="body1" color="textSecondary">
-              {isAuthenticated
-                ? "Click the + button to add your first member"
-                : "Login to manage club members"}
-            </Typography>
-          </Box>
-        )}
-        {/** Load more button */}
-        {hasMore && displayedMembers.length > 0 && (
-          <LoadMoreContainer>
-            <Button
-              variant="outlined"
-              size="large"
-              onClick={loadMoreMembers}
-              disabled={loadingMore}
-              startIcon={
-                loadingMore ? (
-                  <CircularProgress size={20} />
-                ) : (
-                  <VisibilityIcon />
-                )
-              }
-            >
-              {loadingMore ? "Loading..." : "Load More Members"}
-            </Button>
-          </LoadMoreContainer>
-        )}
+      {/** Members grid */}
+      <Grid container spacing={3}>
+        {displayedMembers.map((member: Member, index: number) => (
+          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={member.id || index}>
+            <Grow in={true} timeout={500 + index * 100}>
+              <MemberCard>
+                <MemberImage
+                  image={
+                    member.avatar ||
+                    `https://i.pravatar.cc/400?img=${(0 % 70) + 1}`
+                  }
+                  //title={member.email}
+                >
+                  <MemberOverlay className="member-overlay" />
+                  {isAuthenticated && (
+                    <MemberActions className="member-actions">
+                      <Tooltip title="Edit Member">
+                        <ActionButton
+                          size="small"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleEditMember(member);
+                          }}
+                        >
+                          <EditIcon fontSize="small" />
+                        </ActionButton>
+                      </Tooltip>
+                      <Tooltip title="Delete Member">
+                        <ActionButton
+                          size="small"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteClick(member);
+                          }}
+                        >
+                          <DeleteIcon fontSize="small" />
+                        </ActionButton>
+                      </Tooltip>
+                    </MemberActions>
+                  )}
+                  <BooksContainer className="member-books">
+                    <Typography
+                      variant="body1"
+                      component="span"
+                      sx={{
+                        color: "#00A8E1",
+                        fontWeight: "bold",
+                        fontSize: "14px",
+                      }}
+                    >
+                      {member.books.length}{" "}
+                      {member.books.length === 1 ? "Book" : "Books"}
+                    </Typography>
+                  </BooksContainer>
+                </MemberImage>
 
-        <MemberForm
-          open={formOpen}
-          onClose={() => {
-            setFormOpen(false);
-            setEditingMember(null);
-          }}
-          onSubmit={handleFormSubmit}
-          member={editingMember}
-          mode={formMode}
-        />
+                <MemberInfo>
+                  <Box>
+                    <Typography variant="h6" component="h3" noWrap>
+                      {member.email}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary">
+                      Member since {formatDateOfJoining(member.dateOfJoining)}
+                    </Typography>
+                  </Box>
+                </MemberInfo>
+              </MemberCard>
+            </Grow>
+          </Grid>
+        ))}
+      </Grid>
+      {/** No members found message */}
+      {displayedMembers.length === 0 && !loading && (
+        <Box textAlign="center" py={8}>
+          <Typography variant="h5" color="textSecondary" gutterBottom>
+            No members found
+          </Typography>
+          <Typography variant="body1" color="textSecondary">
+            {isAuthenticated
+              ? "Click the + button to add your first member"
+              : "Login to manage club members"}
+          </Typography>
+        </Box>
+      )}
+      {/** Load more button */}
+      {hasMore && displayedMembers.length > 0 && (
+        <LoadMoreContainer>
+          <Button
+            variant="outlined"
+            size="large"
+            onClick={loadMoreMembers}
+            disabled={loadingMore}
+            startIcon={
+              loadingMore ? <CircularProgress size={20} /> : <VisibilityIcon />
+            }
+          >
+            {loadingMore ? "Loading..." : "Load More Members"}
+          </Button>
+        </LoadMoreContainer>
+      )}
 
-        {/* Member deletion confirmation dialog */}
-        <Dialog
-          open={deleteConfirmOpen}
-          onClose={() => setDeleteConfirmOpen(false)}
-        >
-          <DialogTitle>Confirm Delete</DialogTitle>
-          <DialogContent>
-            <Typography>
-              Are you sure you want to delete member &quot;
-              {memberToDelete?.email}&quot;? This action cannot be undone.
-            </Typography>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => setDeleteConfirmOpen(false)} color="inherit">
-              Cancel
-            </Button>
-            <Button
-              onClick={handleDeleteConfirm}
-              color="error"
-              variant="contained"
-            >
-              Delete
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </MainContainer>
-    </>
+      <MemberForm
+        open={memberFormOpen}
+        onClose={() => {
+          setMemberFormOpen(false);
+          setEditingMember(null);
+        }}
+        onSubmit={handleFormSubmit}
+        member={editingMember}
+        mode={formMode}
+      />
+
+      {/* Member deletion confirmation dialog */}
+      <Dialog
+        open={deleteConfirmOpen}
+        onClose={() => setDeleteConfirmOpen(false)}
+      >
+        <DialogTitle>Confirm Delete</DialogTitle>
+        <DialogContent>
+          <Typography>
+            Are you sure you want to delete member &quot;
+            {memberToDelete?.email}&quot;? This action cannot be undone.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDeleteConfirmOpen(false)} color="inherit">
+            Cancel
+          </Button>
+          <Button
+            onClick={handleDeleteConfirm}
+            color="error"
+            variant="contained"
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </MainContainer>
   );
 };
 
