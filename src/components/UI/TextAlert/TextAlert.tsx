@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
-import Alert from "@mui/material/Alert";
 import { AlertColor } from "@mui/material/Alert";
 
+import { StyledAlert } from "./TextAlert.styles";
 import { TextAlertProps } from "./TextAlert.types";
 
 /**
@@ -21,15 +21,15 @@ const TextAlert = forwardRef<HTMLDivElement, TextAlertProps>(
     };
 
     return (
-      <Alert
+      <StyledAlert
         data-testid={`text-alert-${severity.toLowerCase()}`}
         onClose={onClose}
         severity={severityMap[severity]}
-        sx={{ mb: mode === "add" || mode === "edit" ? 0 : 3 }}
+        mode={mode}
         ref={ref} // Forwards the ref from Fade to the Alert DOM element
       >
         {text}
-      </Alert>
+      </StyledAlert>
     );
   }
 );

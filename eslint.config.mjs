@@ -12,48 +12,65 @@ import { FlatCompat } from "@eslint/eslintrc";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all
+  baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+  allConfig: js.configs.all,
 });
 
-export default defineConfig([{
-    extends: compat.extends("plugin:react/recommended", "plugin:@typescript-eslint/recommended"),
+export default defineConfig([
+  {
+    ignores: [
+      "dist/**",
+      "coverage/**",
+      "node_modules/**",
+      "*.bundle.js",
+      "**/*.bundle.js",
+      "**/*.html",
+      "**/prettify.js",
+      "**/sorter.js",
+    ],
+  },
+  {
+    extends: compat.extends(
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended"
+    ),
 
     plugins: {
-        "@typescript-eslint": typescriptEslint,
-        "react-hooks": fixupPluginRules(reactHooks),
-        jest,
+      "@typescript-eslint": typescriptEslint,
+      "react-hooks": fixupPluginRules(reactHooks),
+      jest,
     },
 
     languageOptions: {
-        parser: tsParser,
-        ecmaVersion: 2018,
-        sourceType: "module",
+      parser: tsParser,
+      ecmaVersion: 2018,
+      sourceType: "module",
 
-        parserOptions: {
-            ecmaFeatures: {
-                jsx: false,
-            },
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: false,
         },
+      },
     },
 
     settings: {
-        react: {
-            pragma: "React",
-            version: "detect",
-        },
+      react: {
+        pragma: "React",
+        version: "detect",
+      },
     },
 
     rules: {
-        "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn",
-        "react/prop-types": "off",
-        "@typescript-eslint/no-var-requires": 0,
-        "jest/no-disabled-tests": "warn",
-        "jest/no-focused-tests": "error",
-        "jest/no-identical-title": "error",
-        "jest/prefer-to-have-length": "warn",
-        "jest/valid-expect": "error",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "react/prop-types": "off",
+      "@typescript-eslint/no-var-requires": 0,
+      "jest/no-disabled-tests": "warn",
+      "jest/no-focused-tests": "error",
+      "jest/no-identical-title": "error",
+      "jest/prefer-to-have-length": "warn",
+      "jest/valid-expect": "error",
     },
-}]);
+  },
+]);

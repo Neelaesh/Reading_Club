@@ -3,6 +3,8 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 
 /**
@@ -28,6 +30,17 @@ export const ActionButton = styled(IconButton)(({ theme }) => ({
     transform: "scale(1.1)",
   },
 }));
+
+/**
+ * @styled Typography component for book count display with blue color
+ * @description Typography styled for book count with specific blue color and styling
+ */
+export const BookCountText = styled(Typography)(() => ({
+  color: "#00A8E1",
+  fontWeight: "bold",
+  fontSize: "14px",
+  cursor: "pointer",
+})) as typeof Typography;
 
 /**
  * @styled Box component for member books count display
@@ -60,6 +73,40 @@ export const BooksContainer = styled(Box)(({ theme }) => ({
   border: "2px solid rgba(0, 168, 225, 0.4)",
   backdropFilter: "blur(10px)",
   zIndex: 10,
+}));
+
+/**
+ * @styled Tooltip component for book information display
+ * @description Styled tooltip with custom styling for book information display
+ * @features
+ * - Maximum width (300px) for proper content wrapping
+ * - Dark semi-transparent background for better readability
+ */
+export const BookTooltip = styled(Tooltip)(() => ({
+  "& .MuiTooltip-tooltip": {
+    maxWidth: 300,
+    backgroundColor: "rgba(0, 0, 0, 0.9)",
+  },
+}));
+
+/**
+ * @styled Typography component for clickable link text in tooltip
+ * @description Styled typography for clickable links with primary color and underline
+ */
+export const ClickableTooltipText = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primary.light,
+  cursor: "pointer",
+  textDecoration: "underline",
+}));
+
+/**
+ * @styled Box component for empty state container
+ * @description Centered container for empty state with padding
+ */
+export const EmptyStateContainer = styled(Box)(({ theme }) => ({
+  textAlign: "center",
+  paddingTop: theme.spacing(8),
+  paddingBottom: theme.spacing(8),
 }));
 
 /**
@@ -205,3 +252,13 @@ export const MemberOverlay = styled(Box)(({ theme }) => ({
   justifyContent: "flex-end",
   padding: theme.spacing(2),
 }));
+
+/**
+ * @styled Typography component for tooltip text with conditional margin
+ * @description Typography with conditional bottom margin for tooltip content
+ */
+export const TooltipText = styled(Typography)<{ hasTruncated?: boolean }>(
+  ({ theme, hasTruncated = false }) => ({
+    marginBottom: hasTruncated ? theme.spacing(1) : 0,
+  })
+);

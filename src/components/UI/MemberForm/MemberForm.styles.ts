@@ -1,21 +1,39 @@
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
+import CircularProgress from "@mui/material/CircularProgress";
 import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import InputLabel from "@mui/material/InputLabel";
 import { styled } from "@mui/material/styles";
 
 /**
- * @styled Dialog component with custom paper styling
- * @description Provides a modal dialog with rounded corners, fixed dimensions,
+ * @styled Animated chip component with hover effects
+ * @description Extends the Chip component with smooth scale transition and shadow effects on hover
  */
-export const StyledDialog = styled(Dialog)(({ theme }) => ({
-  "& .MuiDialog-paper": {
-    borderRadius: theme.spacing(2),
-    minWidth: "500px",
-    maxWidth: "600px",
-    backgroundColor: theme.palette.background.paper,
-    backgroundImage: "none",
+export const AnimatedChip = styled(Chip)(({ theme }) => ({
+  transition: "all 0.3s ease-in-out",
+  "&:hover": {
+    transform: "scale(1.05)",
+    boxShadow: theme.shadows[2],
   },
+}));
+
+/**
+ * @styled Scrollable container for displaying book chips
+ * @description Creates a flex-wrap container for book selection chips with scroll capability
+ */
+export const BookChipContainer = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexWrap: "wrap",
+  gap: theme.spacing(1),
+  marginTop: theme.spacing(1),
+  maxHeight: "120px",
+  overflowY: "auto",
+  padding: theme.spacing(1),
+  borderRadius: theme.spacing(1),
+  backgroundColor: theme.palette.action.hover,
 }));
 
 /**
@@ -42,34 +60,6 @@ export const FormContainer = styled(Box)(({ theme }) => ({
 }));
 
 /**
- * @styled Scrollable container for displaying book chips
- * @description Creates a flex-wrap container for book selection chips with scroll capability
- */
-export const BookChipContainer = styled(Box)(({ theme }) => ({
-  display: "flex",
-  flexWrap: "wrap",
-  gap: theme.spacing(1),
-  marginTop: theme.spacing(1),
-  maxHeight: "120px",
-  overflowY: "auto",
-  padding: theme.spacing(1),
-  borderRadius: theme.spacing(1),
-  backgroundColor: theme.palette.action.hover,
-}));
-
-/**
- * @styled Animated chip component with hover effects
- * @description Extends the Chip component with smooth scale transition and shadow effects on hover
- */
-export const AnimatedChip = styled(Chip)(({ theme }) => ({
-  transition: "all 0.3s ease-in-out",
-  "&:hover": {
-    transform: "scale(1.05)",
-    boxShadow: theme.shadows[2],
-  },
-}));
-
-/**
  * @styled Centered loading state container
  * @description Creates a flex container for displaying loading indicators and related content
  */
@@ -80,4 +70,52 @@ export const LoadingContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(3),
   flexDirection: "column",
   gap: theme.spacing(2),
+}));
+
+/**
+ * @styled CircularProgress component with margin for loading states
+ * @description Styled CircularProgress with right margin for inline loading indicators
+ */
+export const LoadingProgress = styled(CircularProgress)(({ theme }) => ({
+  marginRight: theme.spacing(1),
+}));
+
+/**
+ * @styled InputLabel component for selected books section
+ * @description Styled InputLabel with bottom margin and primary text color
+ */
+export const SectionLabel = styled(InputLabel)(({ theme }) => ({
+  marginBottom: theme.spacing(1),
+  color: theme.palette.text.primary,
+}));
+
+/**
+ * @styled Dialog component with custom paper styling
+ * @description Provides a modal dialog with rounded corners, fixed dimensions,
+ */
+export const StyledDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiDialog-paper": {
+    borderRadius: theme.spacing(2),
+    minWidth: "500px",
+    maxWidth: "600px",
+    backgroundColor: theme.palette.background.paper,
+    backgroundImage: "none",
+  },
+}));
+
+/**
+ * @styled DialogActions component with custom padding and border
+ * @description Styled DialogActions with padding and top border for form actions
+ */
+export const StyledDialogActions = styled(DialogActions)(({ theme }) => ({
+  padding: theme.spacing(3),
+  borderTop: `1px solid ${theme.palette.divider}`,
+}));
+
+/**
+ * @styled DialogContent component with custom padding
+ * @description Styled DialogContent with consistent padding for form content
+ */
+export const StyledDialogContent = styled(DialogContent)(({ theme }) => ({
+  padding: theme.spacing(3),
 }));

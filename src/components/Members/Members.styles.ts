@@ -3,23 +3,6 @@ import Container from "@mui/material/Container";
 import { styled } from "@mui/material/styles";
 
 /**
- * @styled Container component for the main members page layout
- * @description Provides the primary container for the members page with proper spacing
- * and minimum height to ensure full viewport coverage.
- * @features
- * - Top padding adjusted for reduced spacing (theme.spacing(10))
- * - Bottom padding for content separation (theme.spacing(10))
- * - Minimum height set to full viewport height
- * @param theme - Material-UI theme object for consistent spacing
- * @returns Styled Container component for main layout
- */
-export const MainContainer = styled(Container)(({ theme }) => ({
-  paddingTop: theme.spacing(10), // Reduced padding since member count is now in header
-  paddingBottom: theme.spacing(10),
-  minHeight: "100vh",
-}));
-
-/**
  * @styled Box component for loading state display
  * @description Creates a centered loading container with proper spacing and
  * layout for loading indicators and messages.
@@ -38,4 +21,39 @@ export const LoadingContainer = styled(Box)(({ theme }) => ({
   minHeight: "300px",
   flexDirection: "column",
   gap: theme.spacing(2),
+}));
+
+/**
+ * @styled Container component for the main members page layout
+ * @description Provides the primary container for the members page with proper spacing
+ * and minimum height to ensure full viewport coverage.
+ * @features
+ * - Top padding adjusted for reduced spacing (theme.spacing(10))
+ * - Bottom padding for content separation (theme.spacing(10))
+ * - Minimum height set to full viewport height
+ * @param theme - Material-UI theme object for consistent spacing
+ * @returns Styled Container component for main layout
+ */
+export const MainContainer = styled(Container)(({ theme }) => ({
+  paddingTop: theme.spacing(10), // Reduced padding since member count is now in header
+  paddingBottom: theme.spacing(10),
+  minHeight: "100vh",
+}));
+
+/**
+ * @styled Box component for page header actions
+ * @description Creates a flexible container for page header actions with proper
+ * alignment and spacing.
+ * @features
+ * - Flexbox layout with space-between distribution
+ * - Vertical center alignment for consistent button positioning
+ * - Top margin for separation from banner component
+ * @param theme - Material-UI theme object for spacing consistency
+ * @returns Styled Box component for header actions
+ */
+export const PageHeaderActions = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginTop: theme.spacing(2),
 }));

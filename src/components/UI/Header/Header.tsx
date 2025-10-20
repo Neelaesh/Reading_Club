@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import BookIcon from "@mui/icons-material/MenuBook";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PeopleIcon from "@mui/icons-material/People";
@@ -48,9 +47,7 @@ const Header: FC = () => {
       <StyledAppBar>
         <StyledToolbar>
           <LogoSection>
-            <IconButton edge="start" color="primary" size="large">
-              <BookIcon fontSize="large" />
-            </IconButton>
+            <BookIcon fontSize="large" />
             <Typography
               variant="h5"
               component="h1"

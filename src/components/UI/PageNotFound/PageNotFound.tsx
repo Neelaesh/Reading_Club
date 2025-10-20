@@ -1,24 +1,25 @@
 import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import BookIcon from "@mui/icons-material/MenuBook";
-import {
-  Box,
-  Button,
-  Container,
-  Typography,
-  CardContent,
-  Fade,
-  Zoom,
-} from "@mui/material";
+import { Button, Container, Typography, Fade, Zoom } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 
 import {
   NotFoundContainer,
   AnimatedBookIcon,
   FloatingBook,
-  ActionCard,
   GradientText,
   MainIllustration,
+  MainTitle,
+  Subtitle,
+  ActionSection,
+  IconLarge,
+  CenteredContent,
+  IconContainer,
+  MaxWidthActionCard,
+  CenteredCardContent,
+  SpacedTypography,
+  HelpText,
+  LargeBookIcon,
 } from "./PageNotFound.styles";
 import { useAuth } from "../../../contexts/AuthContext/AuthContext";
 
@@ -64,63 +65,44 @@ const PageNotFound: FC = () => {
 
       <Container maxWidth="md">
         <Fade in={true} timeout={800}>
-          <Box textAlign="center">
+          <CenteredContent>
             {/* Main 404 Illustration */}
             <MainIllustration>
               <Zoom in={true} timeout={1000}>
                 <AnimatedBookIcon>
-                  <BookIcon sx={{ fontSize: 120, color: "primary.main" }} />
+                  <LargeBookIcon />
                 </AnimatedBookIcon>
               </Zoom>
 
-              <Box sx={{ mt: 2 }}>
+              <IconContainer>
                 <GradientText variant="h1">404</GradientText>
-                <Typography
-                  variant="h4"
-                  component="h2"
-                  color="text.primary"
-                  sx={{ mb: 2, fontWeight: 600 }}
-                >
+                <MainTitle variant="h4" color="text.primary">
                   Page Not Found
-                </Typography>
-                <Typography
-                  variant="h6"
-                  color="text.secondary"
-                  sx={{ mb: 4, maxWidth: 600, mx: "auto", lineHeight: 1.6 }}
-                >
+                </MainTitle>
+                <Subtitle variant="h6" color="text.secondary">
                   Oops! It looks like this page got lost in the library. The
                   page you&apos;re looking for doesn&apos;t exist or has been
                   moved.
-                </Typography>
-              </Box>
+                </Subtitle>
+              </IconContainer>
             </MainIllustration>
 
             {/* Navigation Actions */}
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                mt: 4,
-              }}
-            >
+            <ActionSection>
               {/* Primary Actions */}
               <Fade in={true} timeout={1200}>
-                <ActionCard sx={{ maxWidth: 600 }}>
-                  <CardContent sx={{ textAlign: "center", p: 3 }}>
-                    <HomeIcon
-                      sx={{ fontSize: 48, color: "primary.main", mb: 2 }}
-                    />
+                <MaxWidthActionCard>
+                  <CenteredCardContent>
+                    <IconLarge>
+                      <HomeIcon />
+                    </IconLarge>
                     <Typography variant="h6" gutterBottom>
                       Go Home
                     </Typography>
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      sx={{ mb: 3 }}
-                    >
+                    <SpacedTypography variant="body2" color="text.secondary">
                       Return to the{" "}
                       {isAuthenticated ? "admin page" : "main page"}
-                    </Typography>
+                    </SpacedTypography>
                     <Button
                       variant="contained"
                       size="large"
@@ -130,21 +112,17 @@ const PageNotFound: FC = () => {
                     >
                       Take me home
                     </Button>
-                  </CardContent>
-                </ActionCard>
+                  </CenteredCardContent>
+                </MaxWidthActionCard>
               </Fade>
-            </Box>
+            </ActionSection>
 
             {/* Help Text */}
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              sx={{ mt: 4, opacity: 0.7 }}
-            >
+            <HelpText variant="body2" color="text.secondary">
               If you believe this is an error, please check the URL or contact
               support.
-            </Typography>
-          </Box>
+            </HelpText>
+          </CenteredContent>
         </Fade>
       </Container>
     </NotFoundContainer>

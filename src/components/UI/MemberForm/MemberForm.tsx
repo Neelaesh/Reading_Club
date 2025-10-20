@@ -3,8 +3,6 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import CloseIcon from "@mui/icons-material/Close";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
 import Fade from "@mui/material/Fade";
 import FormControl from "@mui/material/FormControl";
 import IconButton from "@mui/material/IconButton";
@@ -20,7 +18,11 @@ import {
   DialogTitleStyled,
   FormContainer,
   LoadingContainer,
+  LoadingProgress,
+  SectionLabel,
   StyledDialog,
+  StyledDialogActions,
+  StyledDialogContent,
 } from "./MemberForm.styles";
 import { Book } from "../../../types/book";
 import { bookService } from "../../../services/Books/Books";
@@ -245,7 +247,7 @@ const MemberForm: FC<MemberFormProps> = ({
         </IconButton>
       </DialogTitleStyled>
 
-      <DialogContent sx={{ padding: 3 }}>
+      <StyledDialogContent>
         <FormContainer>
           {errors.length > 0 && (
             <Fade in={errors.length > 0}>
@@ -299,9 +301,7 @@ const MemberForm: FC<MemberFormProps> = ({
           </FormControl>
           {formData.books.length > 0 && (
             <Box>
-              <InputLabel shrink sx={{ mb: 1, color: "text.primary" }}>
-                Selected Books:
-              </InputLabel>
+              <SectionLabel shrink>Selected Books:</SectionLabel>
               <BookChipContainer>
                 {getSelectedBookTitles().map((book) => (
                   <AnimatedChip
@@ -324,11 +324,9 @@ const MemberForm: FC<MemberFormProps> = ({
             </LoadingContainer>
           )}
         </FormContainer>
-      </DialogContent>
+      </StyledDialogContent>
 
-      <DialogActions
-        sx={{ padding: 3, borderTop: "1px solid", borderColor: "divider" }}
-      >
+      <StyledDialogActions>
         <Button
           onClick={onClose}
           disabled={loading}
@@ -346,7 +344,7 @@ const MemberForm: FC<MemberFormProps> = ({
         >
           {loading ? (
             <>
-              <CircularProgress size={20} sx={{ mr: 1 }} />
+              <LoadingProgress size={20} />
               {mode === "add" ? "Adding..." : "Updating..."}
             </>
           ) : mode === "add" ? (
@@ -355,7 +353,7 @@ const MemberForm: FC<MemberFormProps> = ({
             "Update Member"
           )}
         </Button>
-      </DialogActions>
+      </StyledDialogActions>
     </StyledDialog>
   );
 };

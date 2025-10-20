@@ -1,8 +1,8 @@
 {
-  "name": "react_prod_grade_app_template",
+  "name": "reading_club",
   "version": "1.0.1",
-  "description": "A production grade application template built using React JS, Typescript, Web pack, MUI, Jest, Docker, Nginx",
-  "main": " react_template",
+  "description": "A responsive Single-Page Application (SPA) built to manage and showcase a virtual book club",
+  "main": "src/index.tsx",
   "scripts": {
     "start": "concurrently \"npm run server\" \"webpack serve --config webpack.dev.js\"",
     "server": "json-server db/db.json --port 5000",
@@ -13,25 +13,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Neelaesh/React_Production_Grade_App.git"
+    "url": "https://github.com/Neelaesh/Reading_Club.git"
   },
   "keywords": [
     "react",
+    "js",
     "mui",
     "typescript",
     "jest",
     "web",
     "pack",
-    "docker",
-    "react",
-    "js"
+    "docker"
   ],
   "author": "neelaesh",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Neelaesh/React_Production_Grade_App/issues"
+    "url": "https://github.com/Neelaesh/Reading_Club/issues"
   },
-  "homepage": "https://github.com/Neelaesh/React_Production_Grade_App#readme",
+  "homepage": "https://github.com/Neelaesh/Reading_Club#readme",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
