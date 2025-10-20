@@ -153,7 +153,7 @@ export const MemberActions = styled(Box)(({ theme }) => ({
  * @description Creates interactive member cards with hover effects, animations,
  * and overlay functionality for member actions and book information.
  * @features
- * - Fixed height (350px) for consistent card sizing
+ * - Fixed height (320px) for consistent card sizing
  * - Rounded corners (16px border radius) for modern appearance
  * - Smooth hover animations with transform and shadow effects
  * - Overlay and action visibility toggles on hover
@@ -163,7 +163,7 @@ export const MemberActions = styled(Box)(({ theme }) => ({
  */
 export const MemberCard = styled(Card)(({ theme }) => ({
   position: "relative",
-  height: "350px",
+  height: "320px",
   backgroundColor: theme.palette.background.paper,
   borderRadius: "16px",
   overflow: "hidden",
@@ -209,19 +209,20 @@ export const MemberImage = styled(CardMedia)(() => ({
  * @description Provides structured layout for member details with consistent
  * height and spacing, using flexbox for content distribution.
  * @features
- * - Fixed height (110px) for uniform card content area
+ * - Fixed height (80px) for uniform card content area
  * - Theme-based padding for consistent spacing
- * - Flexbox column layout with space-between distribution
+ * - Flexbox column layout with flex-start alignment
  * - Proper content separation and alignment
  * @param theme - Material-UI theme object for padding consistency
  * @returns Styled CardContent component for member information
  */
 export const MemberInfo = styled(CardContent)(({ theme }) => ({
   padding: theme.spacing(2),
-  height: "110px",
+  height: "80px",
   display: "flex",
   flexDirection: "column",
-  justifyContent: "space-between",
+  justifyContent: "flex-start",
+  gap: theme.spacing(0.5),
 }));
 
 /**
