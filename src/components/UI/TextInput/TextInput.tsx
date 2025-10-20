@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC } from "react";
-import TextField from "@mui/material/TextField";
 import { TextInputProps } from "./TextInput.types";
+import { StyledTextField } from "./TextInput.styles";
 
 /**
  * @component
@@ -63,7 +63,7 @@ export const TextInput: FC<TextInputProps> = ({
   };
 
   return (
-    <TextField
+    <StyledTextField
       label={label}
       type={type}
       value={value}
@@ -76,16 +76,6 @@ export const TextInput: FC<TextInputProps> = ({
       error={error}
       required={required}
       placeholder={placeholder}
-      slotProps={{
-        formHelperText: {
-          sx: {
-            color: error ? "error.main" : "text.secondary",
-            fontSize: "0.75rem",
-            marginTop: 1,
-            marginLeft: 0,
-          },
-        },
-      }}
       {...otherProps}
     />
   );

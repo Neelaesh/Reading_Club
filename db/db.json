@@ -198,26 +198,6 @@
       "id": "fbca"
     },
     {
-      "id": "736d",
-      "email": "dudu@example.com",
-      "books": [
-        3,
-        4
-      ],
-      "dateOfJoining": "2025-10-19T09:31:15.967Z",
-      "avatar": "https://i.pravatar.cc/400?img=22"
-    },
-    {
-      "id": "72e8",
-      "email": "neelaesh@gmail.com",
-      "books": [
-        4,
-        6
-      ],
-      "dateOfJoining": "2025-10-19T09:52:12.129Z",
-      "avatar": "https://i.pravatar.cc/400?img=24"
-    },
-    {
       "id": "261a",
       "email": "tubidubi@exampl.com",
       "books": [

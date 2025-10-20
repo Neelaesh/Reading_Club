@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback, FC } from "react";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import Fade from "@mui/material/Fade";
 
@@ -14,7 +13,11 @@ import {
   INITIAL_MEMBERS_COUNT,
   LOAD_MORE_INCREMENT,
 } from "../../constants/pagination";
-import { LoadingContainer, MainContainer } from "./Members.styles";
+import {
+  LoadingContainer,
+  MainContainer,
+  PageHeaderActions,
+} from "./Members.styles";
 import { Member, MemberFormData } from "../../types/member";
 import { MemberForm } from "../UI/MemberForm";
 import MembersGrid from "../UI/MembersGrid";
@@ -289,17 +292,9 @@ const Members: FC = () => {
       <Banner />
 
       {/** Page header actions */}
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          mb: 3,
-          mt: 2,
-        }}
-      >
+      <PageHeaderActions>
         {isAuthenticated && <AddMemberButton onAddMember={handleAddMember} />}
-      </Box>
+      </PageHeaderActions>
 
       {/** Error alert */}
       {showError && (

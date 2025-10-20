@@ -38,7 +38,7 @@ export const BannerContainer = styled(Box)(({ theme }) => ({
     rgba(0, 168, 225, 0.05) 50%, 
     ${theme.palette.background.paper} 100%)`,
   padding: theme.spacing(8, 0),
-  margin: theme.spacing(0, 0, 4, 0),
+  margin: theme.spacing(0, 0, 0, 0),
   overflow: "hidden",
   borderRadius: "24px",
   border: `1px solid rgba(0, 168, 225, 0.1)`,

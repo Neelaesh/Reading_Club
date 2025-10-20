@@ -12,6 +12,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 
 import {
   ActionButton,
+  BookTooltip,
   BooksContainer,
   LoadMoreContainer,
   MemberActions,
@@ -19,6 +20,10 @@ import {
   MemberImage,
   MemberInfo,
   MemberOverlay,
+  TooltipText,
+  ClickableTooltipText,
+  BookCountText,
+  EmptyStateContainer,
 } from "./MembersGrid.styles";
 import { Book } from "../../../types/book";
 import { formatDateOfJoining } from "../../../utils/member";
@@ -134,55 +139,34 @@ const MemberCardComponent: FC<MemberCardProps> = ({
             </MemberActions>
           )}
           <BooksContainer className="member-books">
-            <Tooltip
+            <BookTooltip
               title={
                 <Box>
-                  <Typography
+                  <TooltipText
                     variant="body2"
-                    sx={{ mb: tooltipData.truncated ? 1 : 0 }}
+                    hasTruncated={tooltipData.truncated}
                   >
                     {tooltipData.text}
-                  </Typography>
+                  </TooltipText>
                   {tooltipData.truncated && (
-                    <Typography
+                    <ClickableTooltipText
                       variant="caption"
-                      sx={{
-                        color: "primary.light",
-                        cursor: "pointer",
-                        textDecoration: "underline",
-                      }}
                       onClick={(e) => {
                         e.stopPropagation();
                         onViewAllBooks(member.books);
                       }}
                     >
                       Click to view all books
-                    </Typography>
+                    </ClickableTooltipText>
                   )}
                 </Box>
               }
               placement="top"
               arrow
-              slotProps={{
-                popper: {
-                  sx: {
-                    "& .MuiTooltip-tooltip": {
-                      maxWidth: 300,
-                      backgroundColor: "rgba(0, 0, 0, 0.9)",
-                    },
-                  },
-                },
-              }}
             >
-              <Typography
+              <BookCountText
                 variant="body1"
                 component="span"
-                sx={{
-                  color: "#00A8E1",
-                  fontWeight: "bold",
-                  fontSize: "14px",
-                  cursor: "pointer",
-                }}
                 onClick={(e) => {
                   if (member.books.length > 3) {
                     e.stopPropagation();
@@ -192,8 +176,8 @@ const MemberCardComponent: FC<MemberCardProps> = ({
               >
                 {member.books.length}{" "}
                 {member.books.length === 1 ? "Book" : "Books"}
-              </Typography>
-            </Tooltip>
+              </BookCountText>
+            </BookTooltip>
           </BooksContainer>
         </MemberImage>
 
@@ -258,7 +242,7 @@ const MembersGrid: FC<MembersGridProps> = ({
   // Show empty state when no members and not loading
   if (members.length === 0 && !loading) {
     return (
-      <Box textAlign="center" py={8}>
+      <EmptyStateContainer>
         <Typography variant="h5" color="textSecondary" gutterBottom>
           No members found
         </Typography>
@@ -267,7 +251,7 @@ const MembersGrid: FC<MembersGridProps> = ({
             ? "Click the + button to add your first member"
             : "Login to manage club members"}
         </Typography>
-      </Box>
+      </EmptyStateContainer>
     );
   }
 

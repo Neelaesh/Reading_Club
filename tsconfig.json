@@ -17,8 +17,8 @@
     "strict": true, // Enable all strict type-checking options
     "target": "es5", // Specifies the ECMAScript target version
     "typeRoots": ["./node_modules/@types", "./types"], // Specifies the root folders for type definitions
-    "types": ["jest", "node", "@testing-library/jest-dom"] // Specifies type definitions to be included
-    //"types": ["jest", "node"]
+    //"types": ["jest", "node", "@testing-library/jest-dom"] // Specifies type definitions to be included
+    "types": ["jest", "node"]
   },
   "include": [
     "./src/index.tsx",

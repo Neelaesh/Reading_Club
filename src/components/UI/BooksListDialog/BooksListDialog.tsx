@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -8,6 +7,15 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Typography from "@mui/material/Typography";
 
 import { BooksListDialogProps, BookCardProps } from "./BooksListDialog.types";
+import {
+  StyledBookCard,
+  DialogTitleHeader,
+  BooksContainer,
+  EmptyStateContainer,
+  BookAuthor,
+  BookGenre,
+  EmptyStateSubtext,
+} from "./BooksListDialog.styles";
 
 /**
  * @component BookCard
@@ -17,36 +25,21 @@ import { BooksListDialogProps, BookCardProps } from "./BooksListDialog.types";
  */
 const BookCard: FC<BookCardProps> = ({ book, onClick, showHover = true }) => {
   return (
-    <Box
+    <StyledBookCard
       onClick={() => onClick?.(book)}
-      sx={{
-        p: 2,
-        border: "1px solid",
-        borderColor: "divider",
-        borderRadius: 1,
-        backgroundColor: "background.paper",
-        cursor: onClick ? "pointer" : "default",
-        ...(showHover && {
-          "&:hover": {
-            backgroundColor: "action.hover",
-          },
-        }),
-      }}
+      hasOnClick={!!onClick}
+      showHover={showHover}
     >
       <Typography variant="subtitle1" fontWeight="bold" color="primary">
         {book.title}
       </Typography>
-      <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
+      <BookAuthor variant="body2" color="text.secondary">
         by {book.author}
-      </Typography>
-      <Typography
-        variant="caption"
-        color="text.secondary"
-        sx={{ mt: 0.5, display: "block" }}
-      >
+      </BookAuthor>
+      <BookGenre variant="caption" color="text.secondary">
         Genre: {book.genre}
-      </Typography>
-    </Box>
+      </BookGenre>
+    </StyledBookCard>
   );
 };
 
@@ -83,46 +76,33 @@ const BooksListDialog: FC<BooksListDialogProps> = ({
       aria-describedby="books-dialog-description"
     >
       <DialogTitle id="books-dialog-title">
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+        <DialogTitleHeader>
           <Typography variant="h6" component="h2">
             {title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             ({books.length} {books.length === 1 ? "book" : "books"})
           </Typography>
-        </Box>
+        </DialogTitleHeader>
       </DialogTitle>
 
       <DialogContent id="books-dialog-description">
         {books.length > 0 ? (
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 2,
-              mt: 1,
-            }}
-          >
+          <BooksContainer>
             {books.map((book) => (
               <BookCard key={book.bookId} book={book} showHover={true} />
             ))}
-          </Box>
+          </BooksContainer>
         ) : (
-          <Box
-            sx={{
-              textAlign: "center",
-              py: 4,
-              color: "text.secondary",
-            }}
-          >
+          <EmptyStateContainer>
             <Typography variant="body1" color="inherit">
               No books found for this member.
             </Typography>
-            <Typography variant="body2" color="inherit" sx={{ mt: 1 }}>
+            <EmptyStateSubtext variant="body2" color="inherit">
               Books will appear here once they are added to the member&apos;s
               collection.
-            </Typography>
-          </Box>
+            </EmptyStateSubtext>
+          </EmptyStateContainer>
         )}
       </DialogContent>
 

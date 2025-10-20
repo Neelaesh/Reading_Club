@@ -1,28 +1,25 @@
 import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import BookIcon from "@mui/icons-material/MenuBook";
-import {
-  Box,
-  Button,
-  Container,
-  Typography,
-  CardContent,
-  Fade,
-  Zoom,
-} from "@mui/material";
+import { Button, Container, Typography, Fade, Zoom } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 
 import {
   NotFoundContainer,
   AnimatedBookIcon,
   FloatingBook,
-  ActionCard,
   GradientText,
   MainIllustration,
   MainTitle,
   Subtitle,
   ActionSection,
   IconLarge,
+  CenteredContent,
+  IconContainer,
+  MaxWidthActionCard,
+  CenteredCardContent,
+  SpacedTypography,
+  HelpText,
+  LargeBookIcon,
 } from "./PageNotFound.styles";
 import { useAuth } from "../../../contexts/AuthContext/AuthContext";
 
@@ -68,16 +65,16 @@ const PageNotFound: FC = () => {
 
       <Container maxWidth="md">
         <Fade in={true} timeout={800}>
-          <Box textAlign="center">
+          <CenteredContent>
             {/* Main 404 Illustration */}
             <MainIllustration>
               <Zoom in={true} timeout={1000}>
                 <AnimatedBookIcon>
-                  <BookIcon sx={{ fontSize: 120, color: "primary.main" }} />
+                  <LargeBookIcon />
                 </AnimatedBookIcon>
               </Zoom>
 
-              <Box sx={{ mt: 2 }}>
+              <IconContainer>
                 <GradientText variant="h1">404</GradientText>
                 <MainTitle variant="h4" color="text.primary">
                   Page Not Found
@@ -87,29 +84,25 @@ const PageNotFound: FC = () => {
                   page you&apos;re looking for doesn&apos;t exist or has been
                   moved.
                 </Subtitle>
-              </Box>
+              </IconContainer>
             </MainIllustration>
 
             {/* Navigation Actions */}
             <ActionSection>
               {/* Primary Actions */}
               <Fade in={true} timeout={1200}>
-                <ActionCard sx={{ maxWidth: 600 }}>
-                  <CardContent sx={{ textAlign: "center", p: 3 }}>
+                <MaxWidthActionCard>
+                  <CenteredCardContent>
                     <IconLarge>
                       <HomeIcon />
                     </IconLarge>
                     <Typography variant="h6" gutterBottom>
                       Go Home
                     </Typography>
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      sx={{ mb: 3 }}
-                    >
+                    <SpacedTypography variant="body2" color="text.secondary">
                       Return to the{" "}
                       {isAuthenticated ? "admin page" : "main page"}
-                    </Typography>
+                    </SpacedTypography>
                     <Button
                       variant="contained"
                       size="large"
@@ -119,21 +112,17 @@ const PageNotFound: FC = () => {
                     >
                       Take me home
                     </Button>
-                  </CardContent>
-                </ActionCard>
+                  </CenteredCardContent>
+                </MaxWidthActionCard>
               </Fade>
             </ActionSection>
 
             {/* Help Text */}
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              sx={{ mt: 4, opacity: 0.7 }}
-            >
+            <HelpText variant="body2" color="text.secondary">
               If you believe this is an error, please check the URL or contact
               support.
-            </Typography>
-          </Box>
+            </HelpText>
+          </CenteredContent>
         </Fade>
       </Container>
     </NotFoundContainer>

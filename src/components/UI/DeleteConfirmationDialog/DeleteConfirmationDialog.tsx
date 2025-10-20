@@ -1,15 +1,18 @@
 import React, { FC } from "react";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Typography from "@mui/material/Typography";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 
 import { DeleteConfirmationDialogProps } from "./DeleteConfirmationDialog.types";
+import {
+  ConfirmButton,
+  StyledDialogActions,
+  TitleBox,
+} from "./DeleteConfirmationDialog.styles";
 
 /**
  * @component DeleteConfirmationDialog
@@ -63,7 +66,7 @@ const DeleteConfirmationDialog: FC<DeleteConfirmationDialogProps> = ({
       disableEscapeKeyDown={loading}
     >
       <DialogTitle id="delete-confirmation-dialog-title">
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+        <TitleBox>
           <WarningAmberIcon
             color="warning"
             fontSize="small"
@@ -72,7 +75,7 @@ const DeleteConfirmationDialog: FC<DeleteConfirmationDialogProps> = ({
           <Typography variant="h6" component="h2">
             {title}
           </Typography>
-        </Box>
+        </TitleBox>
       </DialogTitle>
 
       <DialogContent id="delete-confirmation-dialog-description">
@@ -81,7 +84,7 @@ const DeleteConfirmationDialog: FC<DeleteConfirmationDialogProps> = ({
         </Typography>
       </DialogContent>
 
-      <DialogActions sx={{ px: 3, pb: 2 }}>
+      <StyledDialogActions>
         <Button
           onClick={handleClose}
           color="inherit"
@@ -91,20 +94,17 @@ const DeleteConfirmationDialog: FC<DeleteConfirmationDialogProps> = ({
         >
           {cancelText}
         </Button>
-        <Button
+        <ConfirmButton
           onClick={handleConfirm}
           color={confirmColor}
           variant={confirmVariant}
           disabled={loading}
           startIcon={loading ? <CircularProgress size={16} /> : undefined}
           aria-label={`${confirmText} action`}
-          sx={{
-            minWidth: 100, // Prevent button size changes during loading
-          }}
         >
           {loading ? "Processing..." : confirmText}
-        </Button>
-      </DialogActions>
+        </ConfirmButton>
+      </StyledDialogActions>
     </Dialog>
   );
 };

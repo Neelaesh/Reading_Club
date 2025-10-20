@@ -91,3 +91,10 @@ Once the application is running, you can access:
 - **Testing**: Jest, React Testing Library
 - **Linting**: ESLint with TypeScript support
 - **Styling**: Emotion (CSS-in-JS)
+
+### 📋 Implementation Decisions & Requirement Deviations
+
+- **Requirement**: "Make sure the list is sorted by the date of membership start"  
+  **Implementation**: Members are sorted in descending order (newest first) because any recently added member is displayed at the top which is a better UI/UX experience.
+- **Requirement**: "Please show the list of books per member on the photo mouse-over event"  
+  **Implementation**: Showing more than 2 book titles would hide the photo in the card and not look good. Hence had a dialog shown here and then displayed the book titles in detail.
