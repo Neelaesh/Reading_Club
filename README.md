@@ -35,8 +35,8 @@ A responsive Single-Page Application (SPA) built to manage and showcase a virtua
    This command will:
 
    - Start the JSON server (backend API) on port 5000
-   - Start the webpack development server on port 8080
-   - Automatically open your browser to `http://localhost:8080`
+   - Start the webpack development server on port 3000
+   - Automatically open your browser to `http://localhost:3000`
 
 2. **Alternative: Run components separately**
 
@@ -76,7 +76,7 @@ Once the application is running, you can access:
 
 - Responsive design for mobile and desktop
 - Member management system
-- CRUD operations for book club members
+- CRUD operations for book club admins
 - Client-side routing with React Router
 - Simulated authentication system
 - Material-UI components for modern UI/UX
@@ -90,7 +90,7 @@ Once the application is running, you can access:
 - **Backend**: JSON Server (mock API)
 - **Testing**: Jest, React Testing Library
 - **Linting**: ESLint with TypeScript support
-- **Styling**: Emotion (CSS-in-JS)
+- **Styling**: Emotion Styled components (CSS-in-JS)
 
 ### 📋 Implementation Decisions & Requirement Deviations
 
