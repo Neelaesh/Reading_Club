@@ -1,6 +1,5 @@
 import React, { useState, useEffect, FC, ChangeEvent } from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import CloseIcon from "@mui/icons-material/Close";
 import Fade from "@mui/material/Fade";
@@ -12,13 +11,13 @@ import PersonIcon from "@mui/icons-material/Person";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
+import ActionButton from "../Button/Action";
+import CustomChip from "../CustomChip";
 import {
-  AnimatedChip,
   BookChipContainer,
   DialogTitleStyled,
   FormContainer,
   LoadingContainer,
-  LoadingProgress,
   SectionLabel,
   StyledDialog,
   StyledDialogActions,
@@ -304,13 +303,14 @@ const MemberForm: FC<MemberFormProps> = ({
               <SectionLabel shrink>Selected Books:</SectionLabel>
               <BookChipContainer>
                 {getSelectedBookTitles().map((book) => (
-                  <AnimatedChip
+                  <CustomChip
                     key={book.bookId}
                     label={book.title}
                     onDelete={() => handleRemoveBook(book.bookId)}
                     color="primary"
                     variant="outlined"
                     size="medium"
+                    chipVariant="animated"
                   />
                 ))}
               </BookChipContainer>
@@ -327,32 +327,24 @@ const MemberForm: FC<MemberFormProps> = ({
       </StyledDialogContent>
 
       <StyledDialogActions>
-        <Button
+        <ActionButton
           onClick={onClose}
           disabled={loading}
           color="inherit"
           size="large"
         >
           Cancel
-        </Button>
-        <Button
+        </ActionButton>
+        <ActionButton
           onClick={handleSubmit}
-          disabled={loading || booksLoading}
+          loading={loading || booksLoading}
+          loadingText={mode === "add" ? "Adding..." : "Updating..."}
           variant="contained"
           color="primary"
           size="large"
         >
-          {loading ? (
-            <>
-              <LoadingProgress size={20} />
-              {mode === "add" ? "Adding..." : "Updating..."}
-            </>
-          ) : mode === "add" ? (
-            "Add Member"
-          ) : (
-            "Update Member"
-          )}
-        </Button>
+          {mode === "add" ? "Add Member" : "Update Member"}
+        </ActionButton>
       </StyledDialogActions>
     </StyledDialog>
   );

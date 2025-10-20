@@ -1,17 +1,16 @@
 import React, { FC, useCallback } from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import Grid from "@mui/material/Grid";
 import Grow from "@mui/material/Grow";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
+import ActionButton from "../Button/Action";
 import {
-  ActionButton,
+  ActionButton as StyledIconButton,
   BookTooltip,
   BooksContainer,
   LoadMoreContainer,
@@ -115,7 +114,7 @@ const MemberCardComponent: FC<MemberCardProps> = ({
           {isAuthenticated && (
             <MemberActions className="member-actions">
               <Tooltip title="Edit Member">
-                <ActionButton
+                <StyledIconButton
                   size="small"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -123,10 +122,10 @@ const MemberCardComponent: FC<MemberCardProps> = ({
                   }}
                 >
                   <EditIcon fontSize="small" />
-                </ActionButton>
+                </StyledIconButton>
               </Tooltip>
               <Tooltip title="Delete Member">
-                <ActionButton
+                <StyledIconButton
                   size="small"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -134,7 +133,7 @@ const MemberCardComponent: FC<MemberCardProps> = ({
                   }}
                 >
                   <DeleteIcon fontSize="small" />
-                </ActionButton>
+                </StyledIconButton>
               </Tooltip>
             </MemberActions>
           )}
@@ -278,17 +277,16 @@ const MembersGrid: FC<MembersGridProps> = ({
       {/* Load more button */}
       {hasMore && members.length > 0 && onLoadMore && (
         <LoadMoreContainer>
-          <Button
+          <ActionButton
             variant="outlined"
             size="large"
             onClick={handleLoadMore}
-            disabled={loadingMore}
-            startIcon={
-              loadingMore ? <CircularProgress size={20} /> : <VisibilityIcon />
-            }
+            loading={loadingMore}
+            loadingText="Loading..."
+            startIcon={!loadingMore ? <VisibilityIcon /> : undefined}
           >
-            {loadingMore ? "Loading..." : "Load More Members"}
-          </Button>
+            Load More Members
+          </ActionButton>
         </LoadMoreContainer>
       )}
     </>

@@ -1,6 +1,5 @@
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Chip from "@mui/material/Chip";
 import { styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 
@@ -48,29 +47,4 @@ export const ActionsSection = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   gap: theme.spacing(2),
-}));
-
-/**
- * @styled Chip component for member count badge
- * @description White background chip displaying total member count with custom styling and spacing
- */
-export const MemberCountBadge = styled(Chip)(({ theme }) => ({
-  backgroundColor: "white",
-  color: "black",
-  fontWeight: "bold",
-  fontSize: "0.875rem",
-  borderRadius: "16px",
-  border: `1px solid ${theme.palette.divider}`,
-  padding: theme.spacing(0.5, 1.5),
-  height: "auto",
-  minHeight: "36px",
-  "& .MuiChip-label": {
-    paddingLeft: theme.spacing(1),
-    paddingRight: theme.spacing(1),
-  },
-  "& .MuiChip-icon": {
-    color: "black",
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(0.5),
-  },
 }));

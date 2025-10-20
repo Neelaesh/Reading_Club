@@ -257,8 +257,8 @@ export const MemberOverlay = styled(Box)(({ theme }) => ({
  * @styled Typography component for tooltip text with conditional margin
  * @description Typography with conditional bottom margin for tooltip content
  */
-export const TooltipText = styled(Typography)<{ hasTruncated?: boolean }>(
-  ({ theme, hasTruncated = false }) => ({
-    marginBottom: hasTruncated ? theme.spacing(1) : 0,
-  })
-);
+export const TooltipText = styled(Typography, {
+  shouldForwardProp: (prop) => prop !== "hasTruncated",
+})<{ hasTruncated?: boolean }>(({ theme, hasTruncated = false }) => ({
+  marginBottom: hasTruncated ? theme.spacing(1) : 0,
+}));

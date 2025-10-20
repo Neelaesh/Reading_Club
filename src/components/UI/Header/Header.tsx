@@ -1,17 +1,17 @@
 import React, { FC } from "react";
 import BookIcon from "@mui/icons-material/MenuBook";
-import Button from "@mui/material/Button";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PeopleIcon from "@mui/icons-material/People";
 import Typography from "@mui/material/Typography";
 
+import ActionButton from "../Button/Action";
+import CustomChip from "../CustomChip";
 import {
   StyledAppBar,
   StyledToolbar,
   LogoSection,
   ActionsSection,
-  MemberCountBadge,
 } from "./Header.styles";
 import { useAuth } from "../../../contexts/AuthContext/AuthContext";
 import { useMemberCount } from "../../../contexts/MemberCountContext";
@@ -60,13 +60,14 @@ const Header: FC = () => {
 
           <ActionsSection>
             {!loading && (
-              <MemberCountBadge
+              <CustomChip
+                chipVariant="badge"
                 icon={<PeopleIcon />}
                 label={`Total Members: ${memberCount}`}
                 size="small"
               />
             )}
-            <Button
+            <ActionButton
               variant={isAuthenticated ? "outlined" : "contained"}
               color="primary"
               onClick={handleAuthClick}
@@ -74,7 +75,7 @@ const Header: FC = () => {
               size="large"
             >
               {isAuthenticated ? "Logout" : "Login"}
-            </Button>
+            </ActionButton>
           </ActionsSection>
         </StyledToolbar>
       </StyledAppBar>

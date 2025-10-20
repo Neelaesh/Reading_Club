@@ -196,20 +196,6 @@
       "dateOfJoining": "2025-01-05T13:40:00.000Z",
       "avatar": "https://i.pravatar.cc/200?img=20",
       "id": "fbca"
-    },
-    {
-      "id": "261a",
-      "email": "tubidubi@exampl.com",
-      "books": [
-        3,
-        4,
-        5,
-        6,
-        7,
-        2
-      ],
-      "dateOfJoining": "2025-10-19T10:01:05.554Z",
-      "avatar": "https://i.pravatar.cc/400?img=25"
     }
   ],
   "books": [

@@ -61,7 +61,7 @@ describe("Books List Dialog", () => {
         </TestWrapper>
       );
 
-      expect(screen.getByText("(2 books)")).toBeInTheDocument();
+      expect(screen.getByText("2 books")).toBeInTheDocument();
     });
 
     test("should display singular 'book' for single book", () => {
@@ -71,7 +71,7 @@ describe("Books List Dialog", () => {
         </TestWrapper>
       );
 
-      expect(screen.getByText("(1 book)")).toBeInTheDocument();
+      expect(screen.getByText("1 book")).toBeInTheDocument();
     });
   });
 
@@ -86,7 +86,7 @@ describe("Books List Dialog", () => {
       expect(
         screen.getByText("No books found for this member.")
       ).toBeInTheDocument();
-      expect(screen.getByText("(0 books)")).toBeInTheDocument();
+      expect(screen.getByText("0 books")).toBeInTheDocument();
     });
   });
 

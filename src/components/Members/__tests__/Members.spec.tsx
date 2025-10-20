@@ -9,25 +9,31 @@ import { Member, MemberFormData } from "../../../types/member";
 import { MemberCountProvider } from "../../../contexts/MemberCountContext/MemberCountContext";
 import Members from "../Members";
 
-// Mock all the services
-const mockMemberService = {
-  getAllMembers: jest.fn(),
-  createMember: jest.fn(),
-  updateMember: jest.fn(),
-  deleteMember: jest.fn(),
-};
+// Mock all the services will be imported after jest.mock calls
 
-const mockBookService = {
-  getAllBooks: jest.fn(),
-};
-
+// Create the mocks before jest.mock calls
 jest.mock("../../../services/Members/Members", () => ({
-  memberService: mockMemberService,
+  memberService: {
+    getAllMembers: jest.fn(),
+    createMember: jest.fn(),
+    updateMember: jest.fn(),
+    deleteMember: jest.fn(),
+  },
 }));
 
 jest.mock("../../../services/Books/Books", () => ({
-  bookService: mockBookService,
+  bookService: {
+    getAllBooks: jest.fn(),
+  },
 }));
+
+// Import the mocked services
+import { memberService } from "../../../services/Members/Members";
+import { bookService } from "../../../services/Books/Books";
+
+// Cast services as jest mocks to access mock methods
+const mockedMemberService = memberService as jest.Mocked<typeof memberService>;
+const mockedBookService = bookService as jest.Mocked<typeof bookService>;
 
 // Mock the contexts
 const mockUseAuth = jest.fn();
@@ -209,19 +215,19 @@ const TestWrapper: FC<{ children: ReactNode }> = ({ children }) => (
 // Mock data
 const mockMembers = [
   {
-    id: 1,
+    id: "1",
     email: "john@example.com",
     dateOfJoining: "2023-01-15",
     books: [1, 2],
   },
   {
-    id: 2,
+    id: "2",
     email: "jane@example.com",
     dateOfJoining: "2023-02-10",
     books: [2, 3],
   },
   {
-    id: 3,
+    id: "3",
     email: "bob@example.com",
     dateOfJoining: "2023-03-05",
     books: [],
@@ -229,9 +235,9 @@ const mockMembers = [
 ];
 
 const mockBooks = [
-  { bookId: 1, title: "Book One", author: "Author One" },
-  { bookId: 2, title: "Book Two", author: "Author Two" },
-  { bookId: 3, title: "Book Three", author: "Author Three" },
+  { bookId: 1, title: "Book One", author: "Author One", genre: "Fiction" },
+  { bookId: 2, title: "Book Two", author: "Author Two", genre: "Science" },
+  { bookId: 3, title: "Book Three", author: "Author Three", genre: "History" },
 ];
 
 describe("Members Component", () => {
@@ -255,10 +261,10 @@ describe("Members Component", () => {
         logout: jest.fn(),
       });
 
-      mockMemberService.getAllMembers.mockImplementation(
+      mockedMemberService.getAllMembers.mockImplementation(
         () => new Promise(() => {}) // Never resolves
       );
-      mockBookService.getAllBooks.mockImplementation(
+      mockedBookService.getAllBooks.mockImplementation(
         () => new Promise(() => {}) // Never resolves
       );
 
@@ -279,8 +285,8 @@ describe("Members Component", () => {
         logout: jest.fn(),
       });
 
-      mockMemberService.getAllMembers.mockResolvedValue(mockMembers);
-      mockBookService.getAllBooks.mockResolvedValue(mockBooks);
+      mockedMemberService.getAllMembers.mockResolvedValue(mockMembers);
+      mockedBookService.getAllBooks.mockResolvedValue(mockBooks);
 
       render(
         <TestWrapper>
@@ -296,8 +302,8 @@ describe("Members Component", () => {
         expect(screen.getByTestId("members-grid")).toBeInTheDocument();
       });
 
-      expect(mockMemberService.getAllMembers).toHaveBeenCalledTimes(1);
-      expect(mockBookService.getAllBooks).toHaveBeenCalledTimes(1);
+      expect(mockedMemberService.getAllMembers).toHaveBeenCalledTimes(1);
+      expect(mockedBookService.getAllBooks).toHaveBeenCalledTimes(1);
     }); */
 
     test("should handle API errors gracefully", async () => {
@@ -307,8 +313,10 @@ describe("Members Component", () => {
         logout: jest.fn(),
       });
 
-      mockMemberService.getAllMembers.mockRejectedValue(new Error("API Error"));
-      mockBookService.getAllBooks.mockRejectedValue(new Error("API Error"));
+      mockedMemberService.getAllMembers.mockRejectedValue(
+        new Error("API Error")
+      );
+      mockedBookService.getAllBooks.mockRejectedValue(new Error("API Error"));
 
       render(
         <TestWrapper>
@@ -332,8 +340,8 @@ describe("Members Component", () => {
         logout: jest.fn(),
       });
 
-      mockMemberService.getAllMembers.mockResolvedValue(mockMembers);
-      mockBookService.getAllBooks.mockResolvedValue(mockBooks);
+      mockedMemberService.getAllMembers.mockResolvedValue(mockMembers);
+      mockedBookService.getAllBooks.mockResolvedValue(mockBooks);
 
       render(
         <TestWrapper>
@@ -353,8 +361,8 @@ describe("Members Component", () => {
         logout: jest.fn(),
       });
 
-      mockMemberService.getAllMembers.mockResolvedValue(mockMembers);
-      mockBookService.getAllBooks.mockResolvedValue(mockBooks);
+      mockedMemberService.getAllMembers.mockResolvedValue(mockMembers);
+      mockedBookService.getAllBooks.mockResolvedValue(mockBooks);
 
       render(
         <TestWrapper>
@@ -378,8 +386,8 @@ describe("Members Component", () => {
         logout: jest.fn(),
       });
 
-      mockMemberService.getAllMembers.mockResolvedValue(mockMembers);
-      mockBookService.getAllBooks.mockResolvedValue(mockBooks);
+      mockedMemberService.getAllMembers.mockResolvedValue(mockMembers);
+      mockedBookService.getAllBooks.mockResolvedValue(mockBooks);
     });
 
     test("should open member form for adding new member", async () => {
@@ -409,8 +417,8 @@ describe("Members Component", () => {
         logout: jest.fn(),
       });
 
-      mockMemberService.getAllMembers.mockResolvedValue(mockMembers);
-      mockBookService.getAllBooks.mockResolvedValue(mockBooks);
+      mockedMemberService.getAllMembers.mockResolvedValue(mockMembers);
+      mockedBookService.getAllBooks.mockResolvedValue(mockBooks);
 
       render(
         <TestWrapper>
@@ -454,7 +462,7 @@ describe("Members Component", () => {
         books: [1, 2],
       };
 
-      mockMemberService.createMember.mockResolvedValue(newMember);
+      mockedMemberService.createMember.mockResolvedValue(newMember);
 
       render(
         <TestWrapper>
@@ -475,7 +483,7 @@ describe("Members Component", () => {
       fireEvent.click(screen.getByTestId("form-submit"));
 
       await waitFor(() => {
-        expect(mockMemberService.createMember).toHaveBeenCalledWith({
+        expect(mockedMemberService.createMember).toHaveBeenCalledWith({
           email: "test@example.com",
           books: [1, 2],
         });
@@ -500,9 +508,9 @@ describe("Members Component", () => {
         decrementMemberCount: mockDecrementMemberCount,
       });
 
-      mockMemberService.getAllMembers.mockResolvedValue(mockMembers);
-      mockBookService.getAllBooks.mockResolvedValue(mockBooks);
-      mockMemberService.deleteMember.mockResolvedValue({});
+      mockedMemberService.getAllMembers.mockResolvedValue(mockMembers);
+      mockedBookService.getAllBooks.mockResolvedValue(mockBooks);
+      mockedMemberService.deleteMember.mockResolvedValue({});
 
       render(
         <TestWrapper>
@@ -530,7 +538,7 @@ describe("Members Component", () => {
       fireEvent.click(screen.getByTestId("delete-confirm"));
 
       await waitFor(() => {
-        expect(mockMemberService.deleteMember).toHaveBeenCalledWith(1);
+        expect(mockedMemberService.deleteMember).toHaveBeenCalledWith(1);
         expect(mockDecrementMemberCount).toHaveBeenCalledTimes(1);
       });
     });
@@ -542,8 +550,8 @@ describe("Members Component", () => {
         logout: jest.fn(),
       });
 
-      mockMemberService.getAllMembers.mockResolvedValue(mockMembers);
-      mockBookService.getAllBooks.mockResolvedValue(mockBooks);
+      mockedMemberService.getAllMembers.mockResolvedValue(mockMembers);
+      mockedBookService.getAllBooks.mockResolvedValue(mockBooks);
 
       render(
         <TestWrapper>
@@ -576,7 +584,7 @@ describe("Members Component", () => {
         ).not.toBeInTheDocument();
       });
 
-      expect(mockMemberService.deleteMember).not.toHaveBeenCalled();
+      expect(mockedMemberService.deleteMember).not.toHaveBeenCalled();
     });
 
     test("should update member successfully", async () => {
@@ -586,8 +594,8 @@ describe("Members Component", () => {
         logout: jest.fn(),
       });
 
-      mockMemberService.getAllMembers.mockResolvedValue(mockMembers);
-      mockBookService.getAllBooks.mockResolvedValue(mockBooks);
+      mockedMemberService.getAllMembers.mockResolvedValue(mockMembers);
+      mockedBookService.getAllBooks.mockResolvedValue(mockBooks);
 
       const updatedMember = {
         id: 1,
@@ -596,7 +604,7 @@ describe("Members Component", () => {
         books: [1, 2, 3],
       };
 
-      mockMemberService.updateMember.mockResolvedValue(updatedMember);
+      mockedMemberService.updateMember.mockResolvedValue(updatedMember);
 
       render(
         <TestWrapper>
@@ -622,7 +630,7 @@ describe("Members Component", () => {
       fireEvent.click(screen.getByTestId("form-submit"));
 
       await waitFor(() => {
-        expect(mockMemberService.updateMember).toHaveBeenCalledWith(1, {
+        expect(mockedMemberService.updateMember).toHaveBeenCalledWith(1, {
           email: "test@example.com",
           books: [1, 2],
         });
@@ -638,8 +646,8 @@ describe("Members Component", () => {
         logout: jest.fn(),
       });
 
-      mockMemberService.getAllMembers.mockResolvedValue(mockMembers);
-      mockBookService.getAllBooks.mockResolvedValue(mockBooks);
+      mockedMemberService.getAllMembers.mockResolvedValue(mockMembers);
+      mockedBookService.getAllBooks.mockResolvedValue(mockBooks);
     });
 
     test("should open books list dialog when viewing member books", async () => {
@@ -700,14 +708,14 @@ describe("Members Component", () => {
 
       // Create a large array of members to test pagination
       const largeMembersList = Array.from({ length: 20 }, (_, index) => ({
-        id: index + 1,
+        id: `${index + 1}`,
         email: `member${index + 1}@example.com`,
         dateOfJoining: "2023-01-01",
         books: [],
       }));
 
-      mockMemberService.getAllMembers.mockResolvedValue(largeMembersList);
-      mockBookService.getAllBooks.mockResolvedValue(mockBooks);
+      mockedMemberService.getAllMembers.mockResolvedValue(largeMembersList);
+      mockedBookService.getAllBooks.mockResolvedValue(mockBooks);
 
       render(
         <TestWrapper>
@@ -741,9 +749,9 @@ describe("Members Component", () => {
         logout: jest.fn(),
       });
 
-      mockMemberService.getAllMembers.mockResolvedValue(mockMembers);
-      mockBookService.getAllBooks.mockResolvedValue(mockBooks);
-      mockMemberService.createMember.mockRejectedValue(
+      mockedMemberService.getAllMembers.mockResolvedValue(mockMembers);
+      mockedBookService.getAllBooks.mockResolvedValue(mockBooks);
+      mockedMemberService.createMember.mockRejectedValue(
         new Error("Creation failed")
       );
 
@@ -767,7 +775,7 @@ describe("Members Component", () => {
       fireEvent.click(screen.getByTestId("form-submit"));
 
       await waitFor(() => {
-        expect(mockMemberService.createMember).toHaveBeenCalled();
+        expect(mockedMemberService.createMember).toHaveBeenCalled();
       });
     });
 
@@ -778,9 +786,9 @@ describe("Members Component", () => {
         logout: jest.fn(),
       });
 
-      mockMemberService.getAllMembers.mockResolvedValue(mockMembers);
-      mockBookService.getAllBooks.mockResolvedValue(mockBooks);
-      mockMemberService.deleteMember.mockRejectedValue(
+      mockedMemberService.getAllMembers.mockResolvedValue(mockMembers);
+      mockedBookService.getAllBooks.mockResolvedValue(mockBooks);
+      mockedMemberService.deleteMember.mockRejectedValue(
         new Error("Deletion failed")
       );
 
@@ -820,8 +828,8 @@ describe("Members Component", () => {
         logout: jest.fn(),
       });
 
-      mockMemberService.getAllMembers.mockResolvedValue(mockMembers);
-      mockBookService.getAllBooks.mockResolvedValue(mockBooks);
+      mockedMemberService.getAllMembers.mockResolvedValue(mockMembers);
+      mockedBookService.getAllBooks.mockResolvedValue(mockBooks);
 
       render(
         <TestWrapper>
@@ -853,8 +861,10 @@ describe("Members Component", () => {
         logout: jest.fn(),
       });
 
-      mockMemberService.getAllMembers.mockRejectedValue(new Error("API Error"));
-      mockBookService.getAllBooks.mockRejectedValue(new Error("API Error"));
+      mockedMemberService.getAllMembers.mockRejectedValue(
+        new Error("API Error")
+      );
+      mockedBookService.getAllBooks.mockRejectedValue(new Error("API Error"));
 
       render(
         <TestWrapper>

@@ -1,8 +1,9 @@
 import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Container, Typography, Fade, Zoom } from "@mui/material";
+import { Container, Typography, Fade, Zoom } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 
+import ActionButton from "../Button/Action";
 import {
   NotFoundContainer,
   AnimatedBookIcon,
@@ -103,7 +104,7 @@ const PageNotFound: FC = () => {
                       Return to the{" "}
                       {isAuthenticated ? "admin page" : "main page"}
                     </SpacedTypography>
-                    <Button
+                    <ActionButton
                       variant="contained"
                       size="large"
                       onClick={handleGoHome}
@@ -111,7 +112,7 @@ const PageNotFound: FC = () => {
                       startIcon={<HomeIcon />}
                     >
                       Take me home
-                    </Button>
+                    </ActionButton>
                   </CenteredCardContent>
                 </MaxWidthActionCard>
               </Fade>

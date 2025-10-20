@@ -1,5 +1,4 @@
 import Box from "@mui/material/Box";
-import Chip from "@mui/material/Chip";
 import CircularProgress from "@mui/material/CircularProgress";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -7,18 +6,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import InputLabel from "@mui/material/InputLabel";
 import { styled } from "@mui/material/styles";
-
-/**
- * @styled Animated chip component with hover effects
- * @description Extends the Chip component with smooth scale transition and shadow effects on hover
- */
-export const AnimatedChip = styled(Chip)(({ theme }) => ({
-  transition: "all 0.3s ease-in-out",
-  "&:hover": {
-    transform: "scale(1.05)",
-    boxShadow: theme.shadows[2],
-  },
-}));
 
 /**
  * @styled Scrollable container for displaying book chips

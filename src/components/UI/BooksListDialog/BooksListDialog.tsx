@@ -1,15 +1,10 @@
 import React, { FC } from "react";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
 import Typography from "@mui/material/Typography";
 
+import CustomDialog from "../CustomDialog";
 import { BooksListDialogProps, BookCardProps } from "./BooksListDialog.types";
 import {
   StyledBookCard,
-  DialogTitleHeader,
   BooksContainer,
   EmptyStateContainer,
   BookAuthor,
@@ -46,7 +41,7 @@ const BookCard: FC<BookCardProps> = ({ book, onClick, showHover = true }) => {
 /**
  * @component BooksListDialog
  * @description Dialog component for displaying a list of books with detailed information
- * including title, author, and genre.
+ * Uses the unified CustomDialog component with content variant
  * @param props - BooksListDialogProps containing dialog state and book data
  * @returns JSX element representing the books list dialog
  */
@@ -58,60 +53,42 @@ const BooksListDialog: FC<BooksListDialogProps> = ({
   maxWidth = "sm",
   fullWidth = true,
 }) => {
-  /**
-   * @function handleClose
-   * @description Handle dialog close with proper cleanup
-   */
-  const handleClose = () => {
-    onClose();
-  };
+  const subtitle = `${books.length} ${books.length === 1 ? "book" : "books"}`;
+
+  const content =
+    books.length > 0 ? (
+      <BooksContainer>
+        {books.map((book) => (
+          <BookCard key={book.bookId} book={book} showHover={true} />
+        ))}
+      </BooksContainer>
+    ) : (
+      <EmptyStateContainer>
+        <Typography variant="body1" color="inherit">
+          No books found for this member.
+        </Typography>
+        <EmptyStateSubtext variant="body2" color="inherit">
+          Books will appear here once they are added to the member&apos;s
+          collection.
+        </EmptyStateSubtext>
+      </EmptyStateContainer>
+    );
 
   return (
-    <Dialog
+    <CustomDialog
       open={open}
-      onClose={handleClose}
-      maxWidth={maxWidth}
+      onClose={onClose}
+      title={title}
+      subtitle={subtitle}
+      maxWidth={maxWidth === false ? "sm" : maxWidth}
       fullWidth={fullWidth}
-      aria-labelledby="books-dialog-title"
-      aria-describedby="books-dialog-description"
+      variant="content"
+      showCloseButton={true}
+      showCloseInFooter={true}
+      closeText="Close"
     >
-      <DialogTitle id="books-dialog-title">
-        <DialogTitleHeader>
-          <Typography variant="h6" component="h2">
-            {title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            ({books.length} {books.length === 1 ? "book" : "books"})
-          </Typography>
-        </DialogTitleHeader>
-      </DialogTitle>
-
-      <DialogContent id="books-dialog-description">
-        {books.length > 0 ? (
-          <BooksContainer>
-            {books.map((book) => (
-              <BookCard key={book.bookId} book={book} showHover={true} />
-            ))}
-          </BooksContainer>
-        ) : (
-          <EmptyStateContainer>
-            <Typography variant="body1" color="inherit">
-              No books found for this member.
-            </Typography>
-            <EmptyStateSubtext variant="body2" color="inherit">
-              Books will appear here once they are added to the member&apos;s
-              collection.
-            </EmptyStateSubtext>
-          </EmptyStateContainer>
-        )}
-      </DialogContent>
-
-      <DialogActions>
-        <Button onClick={handleClose} variant="outlined" color="primary">
-          Close
-        </Button>
-      </DialogActions>
-    </Dialog>
+      {content}
+    </CustomDialog>
   );
 };
 
